@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
             // off the stack.
             Navigator.pop(context);
           },
-          child: const Text('Launch screen'),
+          child: const Text('Go back to HomePage'),
         ),
       ),
     );

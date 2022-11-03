@@ -9,11 +9,12 @@ void main() {
   runApp(const MyApp());
 }
 
-Future<Null> fetchUserOrder() async { //receive parameters and pass them either as url 
+Future<Null> fetchUserOrder() async {
+  //receive parameters and pass them either as url
   // Imagine that this function is more complex and slow.
-  var url = Uri.https('musicbrainz.org',
-      'ws/2/area/45f07934-675a-46d6-a577-6f8637a411b1');
-  var response = await http.get(url, headers :{"Accept": 'application/json'});
+  var url = Uri.https(
+      'musicbrainz.org', 'ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=cnd');
+  var response = await http.get(url, headers: {"Accept": 'application/json'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 
@@ -41,13 +42,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Home Page'),
-  routes: {
-    // When navigating to the "/" route, build the FirstScreen widget.
-    // When navigating to the "/second" route, build the SecondScreen widget.
-    '/second': (context) => const LoginPage(),
-  },
+      home: const HomePage(title: 'Home Page'),
+      routes: {
+        // When navigating to the "/" route, build the HomePage widget.
+        // When navigating to the "/login" route, build the LoginPage widget.
+        '/login': (context) => const LoginPage(),
+      },
     );
   }
 }
-
