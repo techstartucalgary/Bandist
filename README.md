@@ -1,3 +1,3 @@
-CYBERHIRE
-LIST OF CONTRIBUTORS
-Nurgul Akhshatayeva
+# CYBERHIRE
+## LIST OF CONTRIBUTORS
+- Nurgul Akhshatayeva
