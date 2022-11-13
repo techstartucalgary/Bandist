@@ -57,11 +57,16 @@ class _HomePageState extends State<HomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          
             Text(
               'Hello! We are building a concert finder app!',
               style: Theme.of(context).textTheme.headline4,
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: Text('Login Page'),
+              ),
           ],
         ),
       ),
