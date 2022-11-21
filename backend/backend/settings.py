@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     #social oauth
     'oauth2_provider',
     'rest_framework_social_oauth2',
+    'spotify.apps.SpotifyConfig'
 ]
 
 MIDDLEWARE = [
