@@ -12,6 +12,7 @@ class FloatingButton extends StatelessWidget {
     return RotatedBox(
       quarterTurns: rotation,
       child: RawMaterialButton(
+        onPressed: null,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 8.0,

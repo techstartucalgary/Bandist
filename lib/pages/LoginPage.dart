@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         // resizeToAvoidBottomPadding: false,
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,16 +37,20 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             child: Stack(
               children: <Widget>[
-                Container(
+                Center(child: Container(
                   padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
                   child: Text(
-                    'EVENTO',
+                    'BANDIST',
                     style:
-                        TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 70.0, fontWeight: FontWeight.bold),
                   ),
-                ),
+                ),),
               ],
             ),
+          ),
+          SizedBox(height: 20.0),
+          Center(
+            child: Image(image: AssetImage('assets/undraw_Compose_music_re_wpiw.png')),
           ),
           Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
@@ -56,8 +61,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50.0,
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.greenAccent,
-                        color: Color.fromRGBO(76, 175, 80, 1),
+                        shadowColor: Colors.blueAccent,
+                        color: Color.fromRGBO(84, 159, 204, 1),
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {},
@@ -77,8 +82,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50.0,
                       child: Material(
                         borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.greenAccent,
-                        color: Color.fromRGBO(76, 175, 80, 1),
+                        shadowColor: Colors.blueAccent,
+                        color: Color.fromRGBO(84, 159, 204, 1),
                         elevation: 7.0,
                         child: GestureDetector(
                           onTap: () {},
@@ -95,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                   SizedBox(height: 20.0),
                   Container(
-                    height: 40.0,
+                    height: 50.0,
                     color: Colors.transparent,
                     child: Container(
                       decoration: BoxDecoration(

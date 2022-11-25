@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        //scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)
       ),
       home: const HomePage(title: 'Home Page'),
       routes: {
