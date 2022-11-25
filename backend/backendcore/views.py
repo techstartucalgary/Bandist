@@ -18,4 +18,4 @@ from django.shortcuts import render
 
 
 def hello_django(request, *args, **kwargs):
-    return render(request, '../web/index.html')
+    return render(request, '../../web/index.html')

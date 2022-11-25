@@ -29,13 +29,16 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-CORS_ORIGIN_WHITELIST = (
-    u'http://localhost:8888',
-    u'http://127.0.0.1:8000',
-    u'http://localhost:58116',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     u'http://localhost:60024',
+#     u'http://127.0.0.1:60024',
+#     # u'http://localhost:58116',
+#     # http://localhost:60024/#/
+# )
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework.authtoken',
     #internal
     'backendcore.apps.BackendcoreConfig',
     #social apps plugin
@@ -94,23 +98,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 #REST_FRAMEWORK and SIMPLEJWT
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        #oauth authentication
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-    ),
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#         'rest_framework.authentication.TokenAuthentication',
+#         # 'rest_framework.permissions.IsAdminUser',
+#     ],
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#         # 'rest_framework.authentication.TokenAuthentication',
+#         #oauth authentication
+#         # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+#         # 'rest_framework_social_oauth2.authentication.SocialAuthentication',
+#     ),
+# }
 
-AUTHENTICATION_BACKENDS = (
-    'rest_framework_social_oauth2.backends.DjangoOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'rest_framework_social_oauth2.backends.DjangoOAuth2',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 
 from datetime import timedelta
 
@@ -155,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'MDT'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -170,11 +176,11 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#social auth intregation'
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_SPOTIFY_KEY =env('API_KEY')
-SOCIAL_AUTH_SPOTIFY_SECRET =env('SPOT_SECRETKEY')
-SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email', 'user-library-read']
+# #social auth intregation'
+# SOCIAL_AUTH_URL_NAMESPACE = 'social'
+# SOCIAL_AUTH_SPOTIFY_KEY =env('API_KEY')
+# SOCIAL_AUTH_SPOTIFY_SECRET =env('SPOT_SECRETKEY')
+# SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email', 'user-library-read']
 

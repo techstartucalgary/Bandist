@@ -19,7 +19,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('backendcore.urls')),
-    path('spotify/', include('spotify.urls'))
+    path('spotify/', include('spotify.urls')),
+    path('polls/', include('polls.urls')),
+
 ]
 
 # urlpatterns += [path('app/',include('backendcore.urls'))]
