@@ -24,6 +24,7 @@ class AuthURL(APIView):
             'url':url},status=status.HTTP_200_OK)
 
 def spotify_callback(request, format=None):
+    print('heloooooo!!!!!!!')
     code = request.GET.get('code')
     error = request.GET.get('error')
 
@@ -34,18 +35,18 @@ def spotify_callback(request, format=None):
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET
     }).json()
-
+    print(response)
     access_token = response.get('access_token')
     token_type = response.get('token_type')
     refresh_token = response.get('refresh_token')
     expires_in = response.get('expires_in')
-    error = response.get('error')
+    # error = response.get('error')
     if not request.session.exists(request.session.session_key):
         request.session.create()
     update_or_create_user_tokens(
         request.session.session_key, access_token, token_type, expires_in, refresh_token
     )
-    return 'redirect'
+    return redirect("http://127.0.0.1:8000/spotify/is-authenticated")
 
 
 class IsAuthenticated(APIView):
