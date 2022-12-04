@@ -1,4 +1,4 @@
-# CYBERHIRE
+# Bandist
 
 ## LIST OF CONTRIBUTORS
 
