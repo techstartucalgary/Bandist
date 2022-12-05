@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(title: 'Home Page'),
-      // home: Splash(),
       routes: {
         // When navigating to the "/" route, build the HomePage widget.
         // When navigating to the "/login" route, build the LoginPage widget.

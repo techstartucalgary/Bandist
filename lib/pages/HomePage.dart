@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
@@ -20,8 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -66,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, '/login');
               },
               child: Text('Login Page'),
-              ),
+            ),
           ],
         ),
       ),
