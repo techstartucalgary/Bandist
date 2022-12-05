@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_concert_app/pages/SplashPage.dart';
 import 'package:http/http.dart' as http;
 import 'pages/HomePage.dart';
 import "./pages/LoginPage.dart";
