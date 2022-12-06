@@ -1,0 +1,6 @@
+#TODO:
+#store in env variables
+
+CLIENT_ID = '954437538f1a472baf1170f0b2c39640'
+CLIENT_SECRET = '2af8220890344e9ca0a77612f8609380'
+REDIRECT_URI = 'http://127.0.0.1:8000/spotify/redirect'

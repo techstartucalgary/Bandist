@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../env.sample.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -7,7 +10,6 @@ class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
-
   // This class is the configuration for the state. It holds the values (in this
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
@@ -20,7 +22,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
 
+    //add emplyees list?
+  }
+
+  getLaunchURL(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw "can't launch";
+    }
+  }
+
+  Future <String> getInfo() async {
+    final response =
+        await http.get(Uri.parse("${Env.URL_PREFIX}/spotify/get-auth-url"));
+
+    Map<String, dynamic> user = jsonDecode(response.body);
+
+    String spotifyUrl = user['url'];
+    // print(spotifyUrl);
+    return spotifyUrl;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +89,14 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                // Navigator.pushNamed(context, '/login');
+                getInfo().then((String result) {
+                    String url = result;
+                    getLaunchURL(url);
+                });
               },
               child: Text('Login Page'),
-              ),
+            ),
           ],
         ),
       ),
