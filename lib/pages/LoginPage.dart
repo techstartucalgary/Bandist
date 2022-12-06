@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(height: 20.0),
           Center(
-            child: Image(image: AssetImage('assets/undraw_Compose_music_re_wpiw.png')),
+            child: Image(image: AssetImage('assets/loginImage.png')),
           ),
           Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
