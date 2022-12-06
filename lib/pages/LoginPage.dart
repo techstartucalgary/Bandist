@@ -54,24 +54,25 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 50.0),
                   Container(
                       height: 50.0,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.greenAccent,
-                        color: Color.fromRGBO(76, 175, 80, 1),
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Center(
-                            child: Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Montserrat'),
+                      child: (InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/bottom-bar');
+                          },
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent,
+                            color: Color.fromRGBO(76, 175, 80, 1),
+                            elevation: 7.0,
+                            child: Center(
+                              child: Text(
+                                'LOGIN',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat'),
+                              ),
                             ),
-                          ),
-                        ),
-                      )),
+                          )))),
                   SizedBox(height: 25.0),
                   Container(
                       height: 50.0,
@@ -107,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(20.0)),
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pop();
+                          // Navigator.of(context).pop();
                         },
                         child: Center(
                           child: Text('GO BACK',

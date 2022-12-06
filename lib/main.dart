@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/widgets/bottomNavigationBar.dart';
 import 'package:http/http.dart' as http;
 import 'pages/HomePage.dart';
 import "./pages/LoginPage.dart";
@@ -42,11 +43,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Home Page'),
+      home: const LoginPage(),
       routes: {
         // When navigating to the "/" route, build the HomePage widget.
         // When navigating to the "/login" route, build the LoginPage widget.
         '/login': (context) => const LoginPage(),
+        '/bottom-bar': (context) => const BottomBar(),
       },
     );
   }
