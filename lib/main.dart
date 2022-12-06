@@ -13,8 +13,8 @@ void main() {
 Future<Null> fetchUserOrder() async {
   //receive parameters and pass them either as url
   // Imagine that this function is more complex and slow.
-  var url = Uri.https(
-      'musicbrainz.org', 'ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=cnd');
+  var url = Uri.https('musicbrainz.org',
+      'ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=cnd');
   var response = await http.get(url, headers: {"Accept": 'application/json'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
