@@ -122,13 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Montserrat')),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-          ]),
-        ));
+                          ))))]))])));
   }
 }

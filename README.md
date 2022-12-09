@@ -1,4 +1,4 @@
-# CYBERHIRE
+# Bandist
 
 ## LIST OF CONTRIBUTORS
 
@@ -8,3 +8,4 @@
 - Axel Omar Sánchez Peralta
 - MD Sakil Al Mahmud
 - Aarsh Shah
+- Rhenaldi Ashif Wijaya
