@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/widgets/bottomNavigationBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,7 +12,6 @@ class HomePage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,11 +28,14 @@ class _HomePageState extends State<HomePage> {
     // than having to individually change instances of widgets.
 
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-      ),
-      body: Center(
+      backgroundColor: Color.fromARGB(255, 227, 202, 211),
+
+      // appBar: AppBar(
+      //     // Here we take the value from the MyHomePage object that was created by
+      //     // the App.build method, and use it to set our appbar title.
+      //     ),
+      body: SafeArea(
+          child: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -50,26 +53,46 @@ class _HomePageState extends State<HomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Hello! We are building a concert finder app!',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/login');
-            //   },
-            //   child: Text('Login Page'),
-            //   ),
-              ElevatedButton(
-              onPressed: () {
-              },
-              child: Text('Login Page'),
-            ),
+            Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('Hi Name!',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromRGBO(84, 159, 204, 1),
+                            fontWeight: FontWeight.bold,
+                          )),
+                      Text(
+                        'Location Widget',
+                      ),
+                    ])),
+            Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text('Trending',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Color.fromRGBO(84, 159, 204, 1),
+                          fontWeight: FontWeight.w200,
+                        )))),
+            Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text('Best For You',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Color.fromRGBO(84, 159, 204, 1),
+                          fontWeight: FontWeight.w200,
+                        )))),
           ],
         ),
-      ),
+      )),
     );
   }
 }

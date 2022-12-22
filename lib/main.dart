@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/login" route, build the LoginPage widget.
         '/login': (context) => const LoginPage(),
         '/bottom-bar': (context) => const BottomBar(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
