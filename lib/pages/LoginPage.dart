@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                         // ignore: sized_box_for_whitespace
                         GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, '/home');
+                              Navigator.pushNamed(context, '/bottom-bar');
                             },
                             child: Container(
                               height: 50.0,
