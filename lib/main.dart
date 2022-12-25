@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tech Start | Concert Finder App',
+      title: 'Bandist',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/login" route, build the LoginPage widget.
         '/login': (context) => const LoginPage(),
         '/bottom-bar': (context) => const BottomBar(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
