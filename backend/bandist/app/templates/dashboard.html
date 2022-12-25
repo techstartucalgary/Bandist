@@ -1,0 +1,22 @@
+<h1>{{ display_name }}'s Dashboard</h1>
+
+<h2>Top Artists</h2>
+<ul>
+{% for artist in top_artists %}
+    <li>{{ artist.name }}</li>
+{% endfor %}
+</ul>
+
+<h2>Upcoming Concert in {{ city }}</h2>
+<ul>
+{% for concert in concerts %}
+    <li>{{ concert.name }} at {{ concert.venue.name }} on {{ concert.datetime|date:'M j, Y' }}</li>
+{% endfor %}
+</ul>
+
+<h2>Followed Artists</h2>
+<ul>
+{% for artist in followed_artists %}
+    <li>{{ artist.name }}</li>
+{% endfor %}
+</ul>
