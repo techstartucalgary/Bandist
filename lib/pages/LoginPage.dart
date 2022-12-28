@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/widgets/floating_button.dart';
 // import 'package:flutter_concert_app/widgets/floating_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -37,59 +38,28 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  //SizedBox(height: 20.0),
-                  // ignore: prefer_const_constructors
-                  Expanded(
-                    child: const Image(
-                        image: AssetImage('assets/loginImage2.png')),
-                  ),
-                  Container(
-                      padding: const EdgeInsets.only(
-                          top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
-                      child: Column(children: <Widget>[
-                        // ignore: sized_box_for_whitespace
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/bottom-bar');
-                            },
-                            child: Container(
-                              height: 50.0,
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.blueAccent,
-                                color: const Color.fromRGBO(84, 159, 204, 1),
-                                elevation: 7.0,
-                                child: const Center(
-                                  child: Text(
-                                    'LOGIN',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Montserrat'),
-                                  ),
-                                ),
-                              ),
-                            )),
-                        const SizedBox(height: 25.0),
-                        GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 50.0,
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.blueAccent,
-                                color: const Color.fromRGBO(84, 159, 204, 1),
-                                elevation: 7.0,
-                                child: const Center(
-                                  child: Text('SIGNUP',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Montserrat')),
-                                ),
-                              ),
-                            )),
-                      ]))
-                ])));
+            
+            //SizedBox(height: 20.0),
+            // ignore: prefer_const_constructors
+            Expanded(
+              child: const Image(
+                image: AssetImage('assets/loginImage2.png')),
+            ),
+            Container(
+                padding: const EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    // ignore: sized_box_for_whitespace
+                   FloatingButton(rotation: 0, text: 'LOGIN',),
+                    const SizedBox(height: 25.0),
+                   FloatingButton(rotation: 0, text: 'SIGN UP',),
+                    const SizedBox(height: 20.0),
+                   FloatingButton(rotation: 0, text: 'GO BACK', textColor: Colors.black, boxColor: Colors.white, shadowColor: Colors.black), 
+                  ]
+                )
+            )
+            ])
+        )
+    );
   }
 }
