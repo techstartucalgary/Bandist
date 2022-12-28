@@ -1,49 +1,50 @@
 import 'package:flutter/material.dart';
 
 class FloatingButton extends StatelessWidget {
-  FloatingButton({@required this.onPressed, this.rotation = 0, this.showIcon = true});
+  FloatingButton(
+    {@required  this.rotation = 0, 
+    required this.text ,
+    @required this.textColor = Colors.white,
+    @required this.boxColor = const Color.fromARGB(255, 84, 186, 204),
+    @required this.shadowColor = Colors.blueAccent,
+    @required this.fontFamily = 'Montserrat',
+    @required this.fontWeight = FontWeight.bold,
+  });
 
-  final onPressed;
+  // final onPressed;
   final int rotation;
-  final bool showIcon;
+  String text;
+  final Color textColor;
+  final Color boxColor;
+  final Color shadowColor;
+  final FontWeight fontWeight;
+  final String fontFamily;
+
 
   @override
   Widget build(BuildContext context) {
     return RotatedBox(
       quarterTurns: rotation,
-      child: RawMaterialButton(
-        onPressed: null,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8.0,
-            horizontal: 20.0,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              showIcon
-                  ? Icon(
-                      Icons.explore,
-                      color: Colors.tealAccent,
-                    )
-                  : Text(''),
-              const SizedBox(
-                width: 8.0,
-              ),
-              const Text(
-                'Next',
-                style: TextStyle(
-                  color: Colors.white,
+      child: Container(
+          height: 50.0,
+          child: Material(
+            borderRadius: BorderRadius.circular(20.0),
+            shadowColor: shadowColor,
+            color: boxColor,
+            elevation: 7.0,
+            child: GestureDetector(
+              onTap: () {},
+              child:  Center(
+                child: Text(
+                 text,
+                  style: TextStyle(
+                      color: textColor,
+                      fontWeight: fontWeight,
+                      fontFamily: fontFamily),
                 ),
               ),
-            ],
-          ),
-        ),
-        fillColor: Colors.teal,
-        splashColor: Colors.green,
-        // onPressed: onPressed,
-        shape: const StadiumBorder(),
-      ),
+            ),
+          )),
     );
   }
 }

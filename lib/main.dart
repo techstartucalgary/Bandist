@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/widgets/bottomNavigationBar.dart';
 import 'package:http/http.dart' as http;
 import 'pages/HomePage.dart';
 import "./pages/LoginPage.dart";
@@ -12,8 +13,8 @@ void main() {
 Future<Null> fetchUserOrder() async {
   //receive parameters and pass them either as url
   // Imagine that this function is more complex and slow.
-  var url = Uri.https(
-      'musicbrainz.org', 'ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=cnd');
+  var url = Uri.https('musicbrainz.org',
+      'ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=cnd');
   var response = await http.get(url, headers: {"Accept": 'application/json'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
@@ -41,12 +42,14 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        //scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)
       ),
-      home: const HomePage(title: 'Home Page'),
+      home: const LoginPage(),
       routes: {
         // When navigating to the "/" route, build the HomePage widget.
         // When navigating to the "/login" route, build the LoginPage widget.
         '/login': (context) => const LoginPage(),
+        '/bottom-bar': (context) => const BottomBar(),
       },
     );
   }
