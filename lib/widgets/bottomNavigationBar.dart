@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_concert_app/pages/HomePage.dart';
 import 'package:flutter_concert_app/pages/LoginPage.dart';
+import 'package:flutter_concert_app/pages/SettingsPage.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -16,7 +17,7 @@ class _BottomBarState extends State<BottomBar> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     Text('Search Page'),
-    Text('Settings Page'),
+    SettingsPage(),
   ];
 
   void _onItemTapped(int index) {

@@ -38,28 +38,39 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-            
-            //SizedBox(height: 20.0),
-            // ignore: prefer_const_constructors
-            Expanded(
-              child: const Image(
-                image: AssetImage('assets/loginImage2.png')),
-            ),
-            Container(
-                padding: const EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    // ignore: sized_box_for_whitespace
-                   FloatingButton(rotation: 0, text: 'LOGIN',),
-                    const SizedBox(height: 25.0),
-                   FloatingButton(rotation: 0, text: 'SIGN UP',),
-                    const SizedBox(height: 20.0),
-                   FloatingButton(rotation: 0, text: 'GO BACK', textColor: Colors.black, boxColor: Colors.white, shadowColor: Colors.black), 
-                  ]
-                )
-            )
-            ])
-        )
-    );
+
+                  //SizedBox(height: 20.0),
+                  // ignore: prefer_const_constructors
+                  Expanded(
+                    child: const Image(
+                        image: AssetImage('assets/loginImage2.png')),
+                  ),
+                  Container(
+                      padding: const EdgeInsets.only(
+                          top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
+                      child: Column(children: <Widget>[
+                        // ignore: sized_box_for_whitespace
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/bottom-bar');
+                            },
+                            child: FloatingButton(
+                              rotation: 0,
+                              text: 'LOGIN',
+                            )),
+                        const SizedBox(height: 25.0),
+                        FloatingButton(
+                          rotation: 0,
+                          text: 'SIGN UP',
+                        ),
+                        const SizedBox(height: 20.0),
+                        FloatingButton(
+                            rotation: 0,
+                            text: 'GO BACK',
+                            textColor: Colors.black,
+                            boxColor: Colors.white,
+                            shadowColor: Colors.black),
+                      ]))
+                ])));
   }
 }
