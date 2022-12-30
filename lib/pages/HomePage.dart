@@ -41,43 +41,47 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.all(5.0),
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Stack(
-                      children: <Widget>[
+                    child: 
+                    // Column(
+                    //   children: <Widget>[
                         Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                        Positioned(
-                          bottom: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(200, 0, 0, 0),
-                                  Color.fromARGB(0, 0, 0, 0)
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                              ),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0),
-                            child: Text(
-                              'No. ${imgList.indexOf(item)} image',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
+                        // Positioned(
+                        //   bottom: 0.0,
+                        //   left: 0.0,
+                        //   right: 0.0,
+                        //   child: Container(
+                        //     decoration: BoxDecoration(
+                        //       gradient: LinearGradient(
+                        //         colors: [
+                        //           Color.fromARGB(200, 0, 0, 0),
+                        //           Color.fromARGB(0, 0, 0, 0)
+                        //         ],
+                        //         begin: Alignment.bottomCenter,
+                        //         end: Alignment.topCenter,
+                        //       ),
+                        //     ),
+                        //     padding: EdgeInsets.symmetric(
+                        //         vertical: 10.0, horizontal: 20.0),
+                            // child: Text(
+                            //   'No. ${imgList.indexOf(item)} image',
+                            //   style: TextStyle(
+                            //     color: Colors.white,
+                            //     fontSize: 20.0,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                        //   ),
+                        // ),
+                      // ],
+                    // )
+                    ),
               ),
             ))
         .toList();
+    final double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // backgroundColor: Color.fromARGB(255, 227, 202, 211),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
 
@@ -107,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -131,24 +135,28 @@ class _HomePageState extends State<HomePage> {
                           color: Color.fromRGBO(84, 159, 204, 1),
                           fontWeight: FontWeight.w200,
                         )))),
-            CarouselSlider(
-                options: CarouselOptions(
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: false,
-                    initialPage: 2,
-                    autoPlay: true),
-                items: imageSliders),
             Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text('Best For You',
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Color.fromRGBO(84, 159, 204, 1),
-                          fontWeight: FontWeight.w200,
-                        )))),
+              // height: 300,
+              child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: height/2,
+                      // aspectRatio: 16 / 9,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: false,
+                      initialPage: 2,
+                      autoPlay: true),
+                  items: imageSliders),
+            ),
+            // Container(
+            //     alignment: Alignment.centerLeft,
+            //     child: const Padding(
+            //         padding: EdgeInsets.all(10.0),
+            //         child: Text('Best For You',
+            //             style: TextStyle(
+            //               fontSize: 25,
+            //               color: Color.fromRGBO(84, 159, 204, 1),
+            //               fontWeight: FontWeight.w200,
+            //             )))),
           ],
         ),
       )),
