@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
 
 class TitleWithUnderline extends StatelessWidget {
-  const TitleWithUnderline({Key? key, required this.text}) : super(key: key);
-  final String text;
+  const TitleWithUnderline({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class TitleWithUnderline extends StatelessWidget {
       child: Stack(
         children: [
           Text(
-            text,
+            title,
             style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
