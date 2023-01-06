@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/constants/ColorConstants.dart';
 
 class FloatingButton extends StatelessWidget {
   FloatingButton(
     {@required  this.rotation = 0, 
     required this.text ,
     @required this.textColor = Colors.white,
-    @required this.boxColor = const Color.fromARGB(255, 84, 186, 204),
+    @required this.boxColor = kPrimaryColor,
     @required this.shadowColor = Colors.blueAccent,
     @required this.fontFamily = 'Montserrat',
     @required this.fontWeight = FontWeight.bold,
