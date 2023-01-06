@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
 
 class BodyHomePage extends StatelessWidget {
@@ -26,18 +27,25 @@ class BodyHomePage extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: Container(
+                    alignment: Alignment.center,
+                      child: TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Search',
+                              enabledBorder: InputBorder.none,
+                              contentPadding:
+                                  EdgeInsets.only(left: 15, bottom: 5),
+                              focusedBorder: InputBorder.none)),
                       margin: EdgeInsets.only(left: 10, right: 10),
                       height: 40,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              blurRadius: 20,
-                              offset: Offset(0,10),
-                              color: kPrimaryColor.withOpacity(0.23)
-                            ),
+                                blurRadius: 20,
+                                offset: Offset(0, 10),
+                                color: kPrimaryColor.withOpacity(0.23)),
                           ],
                           borderRadius: BorderRadius.circular(30),
-                          color: Colors.white)))
+                          color: Colors.white))),
             ],
           ),
         )

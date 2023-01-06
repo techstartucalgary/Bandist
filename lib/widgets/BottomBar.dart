@@ -48,6 +48,10 @@ class _BottomBarState extends State<BottomBar> {
                 ),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.search), label: "Search"),
+
+                    // TODO:
+
+                    // change to liked icon
                 BottomNavigationBarItem(
                     icon: Icon(Icons.settings),
                     label: "Settings",

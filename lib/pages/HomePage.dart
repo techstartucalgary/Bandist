@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: kPrimaryColor,
         leading: Container(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 15, top: 10),
           child: IconButton(
             icon: SvgPicture.asset('assets/icons/menu.svg'),
             onPressed: () {},
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
 
 
 
-      
+
     );
   }
 }
