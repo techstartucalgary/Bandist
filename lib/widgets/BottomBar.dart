@@ -32,7 +32,7 @@ class _BottomBarState extends State<BottomBar> {
         body: Center(child: _widgetOptions[_selectedIndex]),
         bottomNavigationBar: Container(
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
             child: BottomNavigationBar(
               showSelectedLabels: false,
@@ -47,11 +47,9 @@ class _BottomBarState extends State<BottomBar> {
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.search), label: "Search"),
-
-                    // TODO:
-
-                    // change to liked icon
+                    activeIcon: Icon(Icons.favorite),
+                    icon: Icon(Icons.favorite_outline_sharp),
+                    label: "Search"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.settings),
                     label: "Settings",

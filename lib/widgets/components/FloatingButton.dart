@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
 
 class FloatingButton extends StatelessWidget {
-  FloatingButton(
-    {@required  this.rotation = 0, 
-    required this.text ,
-    @required this.textColor = Colors.white,
-    @required this.boxColor = kPrimaryColor,
-    @required this.shadowColor = Colors.blueAccent,
-    @required this.fontFamily = 'Montserrat',
-    @required this.fontWeight = FontWeight.bold,
+  FloatingButton({
+    this.rotation = 0,
+    required this.text,
+    this.textColor = Colors.white,
+    this.boxColor = kPrimaryColor,
+    this.shadowColor = Colors.blueAccent,
+    this.fontFamily = 'Montserrat',
+    this.fontWeight = FontWeight.bold,
   });
 
-  // final onPressed;
   final int rotation;
   String text;
   final Color textColor;
@@ -20,7 +19,6 @@ class FloatingButton extends StatelessWidget {
   final Color shadowColor;
   final FontWeight fontWeight;
   final String fontFamily;
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +33,9 @@ class FloatingButton extends StatelessWidget {
             elevation: 7.0,
             child: GestureDetector(
               onTap: () {},
-              child:  Center(
+              child: Center(
                 child: Text(
-                 text,
+                  text,
                   style: TextStyle(
                       color: textColor,
                       fontWeight: fontWeight,

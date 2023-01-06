@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
-import 'package:flutter_concert_app/widgets/BodyHomePage.dart';
+import 'package:flutter_concert_app/widgets/home page/HomePageAppBar.dart';
+import 'package:flutter_concert_app/widgets/home%20page/Header.dart';
 import 'package:flutter_concert_app/widgets/BottomBar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../widgets/components/SmallButton.dart';
+import '../widgets/components/TitleWithUnderline.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,27 +38,35 @@ class _HomePageState extends State<HomePage> {
               ),
             ))
         .toList();
-    final double height = MediaQuery.of(context).size.height;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: kPrimaryColor,
-        leading: Container(
-          padding: const EdgeInsets.only(left: 15, top: 10),
-          child: IconButton(
-            icon: SvgPicture.asset('assets/icons/menu.svg'),
-            onPressed: () {},
-          ),
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Header(),
+            SizedBox(height: 30),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20,5,20,5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TitleWithUnderline(text: 'Recommended'),
+                    SmallButton(
+                        text: 'More',
+                        press: () {
+                          print('rhehe');
+                        }),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
-      resizeToAvoidBottomInset: false,
-      body: BodyHomePage(),
-
-
-
-
 
       // body: SafeArea(
       //     child: Center(
@@ -101,10 +113,6 @@ class _HomePageState extends State<HomePage> {
       //     ],
       //   ),
       // )),
-
-
-
-
     );
   }
 }

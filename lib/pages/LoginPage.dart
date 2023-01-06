@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_concert_app/widgets/FloatingButton.dart';
-// import 'package:flutter_concert_app/widgets/floating_button.dart';
+import 'package:flutter_concert_app/widgets/components/FloatingButton.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
