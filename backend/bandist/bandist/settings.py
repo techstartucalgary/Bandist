@@ -20,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-59d(4*a3y9wj9a^*%8qsq9u(orz=&_9alc)vqgp((1@+uy+px-'
-
+# SECRET_KEY = 'django-insecure-59d(4*a3y9wj9a^*%8qsq9u(orz=&_9alc)vqgp((1@+uy+px-'
+SECRET_KEY = "ui0pp)dodxk_wpwzbkn_@^mz-bq&^%c%h#8a(p-8my#y0oc1n1"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'app',
+    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,4 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #SPOTIPY
 SPOTIPY_CLIENT_ID = "d4aa56ab1e3243168d3be322b8cad9af"
 SPOTIPY_CLIENT_SECRET = "831695beab5c4d5e9c8f2bc42bdbe422"
-SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/"
+SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/" 
