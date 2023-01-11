@@ -25,7 +25,7 @@ SECRET_KEY = "ui0pp)dodxk_wpwzbkn_@^mz-bq&^%c%h#8a(p-8my#y0oc1n1"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
@@ -124,6 +129,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #SPOTIPY
-SPOTIPY_CLIENT_ID = "954437538f1a472baf1170f0b2c39640"
-SPOTIPY_CLIENT_SECRET = "2af8220890344e9ca0a77612f8609380"
+SPOTIPY_CLIENT_ID = "73179dc2625a435f8a3672b3379ceadd"
+SPOTIPY_CLIENT_SECRET = "74a1523073d9411ab200160c41f7e07f"
 SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/" 

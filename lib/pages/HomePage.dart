@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    print('reached init____________________');
+    getInfo();
 
     //add emplyees list?
   }
@@ -39,13 +41,14 @@ class _HomePageState extends State<HomePage> {
 
   Future <String> getInfo() async {
     final response =
-        await http.get(Uri.parse("${Env.URL_PREFIX}/spotify/get-auth-url"));
+        await http.get(Uri.parse("${Env.URL_PREFIX}/getInfo"));
 
     Map<String, dynamic> user = jsonDecode(response.body);
-
-    String spotifyUrl = user['url'];
+    print('reached here _________________________________');
+    print(response);
+    // String spotifyUrl = user['url'];
     // print(spotifyUrl);
-    return spotifyUrl;
+    return 'ss';
   }
 
   @override
@@ -90,10 +93,11 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               onPressed: () {
                 // Navigator.pushNamed(context, '/login');
-                getInfo().then((String result) {
-                    String url = result;
-                    getLaunchURL(url);
-                });
+                getInfo();
+                // .then((String result) {
+                //     String url = result;
+                //     getLaunchURL(url);
+                // });
               },
               child: Text('Login Page'),
             ),
