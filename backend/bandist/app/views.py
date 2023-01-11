@@ -41,17 +41,27 @@ def getInfo(request):
     token_info = request.session.get(TOKEN_INFO, None)
    
     if not token_info:
-        redirect('/login')
+        redirect_uri = settings.SPOTIPY_REDIRECT_URI
+        sp_oauth = SpotifyOAuth(
+            client_id=settings.SPOTIPY_CLIENT_ID,
+            client_secret=settings.SPOTIPY_CLIENT_SECRET,
+            redirect_uri=redirect_uri,
+            scope=["user-library-read","user-top-read"] #here you can specify scopes 
+        )
+        auth_url = sp_oauth.get_authorize_url()
+        return redirect(auth_url)
 
     now = int(time.time())
     is_expired = token_info['expires_at'] - now < 60
     if is_expired:
         sp_oauth = SpotifyOAuth(
-        client_id=settings.SPOTIPY_CLIENT_ID,
-        client_secret=settings.SPOTIPY_CLIENT_SECRET,
-        redirect_uri=settings.SPOTIPY_REDIRECT_URI,
-    )
+            client_id=settings.SPOTIPY_CLIENT_ID,
+            client_secret=settings.SPOTIPY_CLIENT_SECRET,
+            redirect_uri=settings.SPOTIPY_REDIRECT_URI,
+            scope=["user-library-read","user-top-read"]
+        )
         token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+        request.session[TOKEN_INFO] = token_info
 
     access_token = token_info['access_token']
     sp = spotipy.Spotify(auth=access_token)
@@ -81,15 +91,11 @@ def getInfo(request):
     #     # events = sp.events(track_ids=track_ids)
     #     # for event in events['events']:
     #         # if event['venue']['city'] == city:
-    #             # concerts.append(event)
-    
-  
-    
+    #             # concerts.append(event) 
     return render(request, 'dashboard.html', {
         'display_name': user.display_name,
         'top_artists': top_artists['items'],
     })
-
 
 # def dashboard(request):
 #     user_id = request.session['user_id']
