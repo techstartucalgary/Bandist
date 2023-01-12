@@ -1,12 +1,11 @@
-from rest_framework import serializers
+# from rest_framework import serializers
 
-from .models import User
+# from .models import Test
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = [
-        'id',
-        'name'
-        ]
+# class EmployeeSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Test
+#         fields = [
+#     'artists',
+#         ]

@@ -4,8 +4,16 @@ from django.shortcuts import render, redirect
 from .models import User
 from django.conf import settings
 import time
+from rest_framework import viewsets
+
 
 TOKEN_INFO = "token_info"
+
+
+
+# Create your views here.
+# class Employee(viewsets.ModelViewSet):
+#     queryset = Test.objects.all()
 
 def login(request):
     sp_oauth = SpotifyOAuth(
