@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
 import 'package:flutter_concert_app/widgets/BottomBar.dart';
+import 'package:flutter_concert_app/pages/ConcertsPage.dart';
 import 'package:http/http.dart' as http;
 import 'pages/HomePage.dart';
 import "./pages/LoginPage.dart";
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/bottom-bar': (context) => const BottomBar(),
         '/home': (context) => const HomePage(),
+        '/concerts': (context) => const ConcertsPage(),
       },
     );
   }
