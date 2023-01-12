@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/pages/ConcertsPage.dart';
 import 'package:flutter_concert_app/widgets/bottomNavigationBar.dart';
 import 'package:http/http.dart' as http;
 import 'pages/HomePage.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/bottom-bar': (context) => const BottomBar(),
         '/home': (context) => const HomePage(),
+        '/concerts': (context) => const ConcertsPage(),
       },
     );
   }
