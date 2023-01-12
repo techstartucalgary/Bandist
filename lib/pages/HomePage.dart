@@ -94,26 +94,32 @@ class _HomePageState extends State<HomePage> {
                       autoPlay: true),
                   items: imageSliders),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/concerts');
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Best For You',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Color.fromRGBO(84, 159, 204, 1),
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                ),
-              ),
+              TitleWithButton(
+              title: 'Best For You',
+              text: 'More',
+              press: () {},
             ),
+
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: TextButton(
+            //     onPressed: () {
+            //       Navigator.of(context).pushNamed('/concerts');
+            //     },
+            //     child: const Padding(
+            //       padding: EdgeInsets.all(10.0),
+            //       child: Text(
+            //         'Best For You',
+            //         textAlign: TextAlign.end,
+            //         style: TextStyle(
+            //           fontSize: 25,
+            //           color: Color.fromRGBO(84, 159, 204, 1),
+            //           fontWeight: FontWeight.w200,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Card(
               elevation: 5,
               child: ListTile(
