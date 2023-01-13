@@ -78,44 +78,57 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> imageSliders = mockDataList
         .map(
           (item) => Container(
-            height: size.height * 0.4,
             margin: const EdgeInsets.all(5),
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5.0),
-                    topRight: Radius.circular(5.0),
-                  ),
-                  child: Image.network(
-                    item.image,
-                    fit: BoxFit.cover,
-                  ),
+            child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(5.0),
+                  topRight: Radius.circular(5.0),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(
-                    left: 5,
-                    right: 5,
-                  ),
-                  height: 30,
-                  decoration: const BoxDecoration(
-                    color: Colors.white54,
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Text(
-                        'Description',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                        ),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 130,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: NetworkImage(item.image),
+                        fit: BoxFit.cover,
+                      )),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 5,
+                        right: 5,
                       ),
-                    ],
-                  ),
+                      height: 30,
+                      decoration: const BoxDecoration(
+                        color: Colors.white54,
+                        shape: BoxShape.rectangle,
+                      ),
+                      child: Row(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const Text(
+                            'Description',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+                // child: Container
+                // (
+                //   clipBehavior: Clip.antiAlias,
+                //   child: Image.network(
+                //     item.image,
+                //     fit: BoxFit.fill,
+
+                //   ),
+                // ),
+
                 ),
-              ],
-            ),
           ),
         )
         .toList();
