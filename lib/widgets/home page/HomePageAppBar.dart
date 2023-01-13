@@ -15,9 +15,7 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
           onPressed: () {},
         ),
       ),
-      
     );
-    
   }
 
   @override
