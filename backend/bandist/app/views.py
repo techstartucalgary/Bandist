@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .models import User
 from django.conf import settings
 import time
+import requests
 
 TOKEN_INFO = "token_info"
 
@@ -80,6 +81,10 @@ def getInfo(request):
     follow_artists = sp.current_user_followed_artists(limit=20, after=None)
     print(follow_artists['artists']['items'][0]['id'])
     print(follow_artists['artists']['items'][0]['name'])
+
+    my_headers = {'Authorization' : 'Bearer 561|iuTTRdE1SgKGBidlg6fB9YZbWrwkdUVL6bv3Rd1p'}
+    response = requests.get('https://zylalabs.com/api/94/music+gigs+and+concerts+tracker+api/146/get+concerts+by+artist?name=BTS', headers=my_headers)
+    print(response.text)
     # artist = sp.artist()
     # print(top_artists['items'][0])
     # for artist in top_artists['items']:
@@ -96,35 +101,4 @@ def getInfo(request):
         'display_name': user.display_name,
         'top_artists': top_artists['items'],
     })
-
-# def dashboard(request):
-#     user_id = request.session['user_id']
-#     user = User.objects.get(spotify_id=user_id)
-#     access_token = user.access_token
-#     sp = spotipy.Spotify(auth=access_token)
-#     # Get the user's top artists
-#     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
-#     # Get the user's followed artists
-#     followed_artists = sp.current_user_followed_artists(limit=50)
-#     # Get the upcoming concerts for the user's top artists in their city
-#     city = user.city
-#     concerts = []
-#     for artist in top_artists['items']:
-#         artist_id = artist['id']
-#         # Get the artist's top tracks
-#         top_tracks = sp.artist_top_tracks(artist_id)
-#         track_ids = [track['id'] for track in top_tracks['tracks']]
-#         # Search for events featuring the artist's top tracks
-#         # events = sp.events(track_ids=track_ids)
-#         # for event in events['events']:
-#             # if event['venue']['city'] == city:
-#                 # concerts.append(event)
-#     return render(request, 'dashboard.html', {
-#         'display_name': user.display_name,
-#         'top_artists': top_artists['items'],
-#         'followed_artists' : followed_artists,
-#     })
-
-
-
 
