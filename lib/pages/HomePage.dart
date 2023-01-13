@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage> {
         .map(
           (item) => Container(
             height: size.height * 0.4,
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             child: Column(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5.0),
                     topRight: Radius.circular(5.0),
                   ),
@@ -48,15 +48,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.only(left: 5, right: 5),
+                    padding: const EdgeInsets.only(left: 5, right: 5),
                     height: 30,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white54, shape: BoxShape.rectangle),
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'Description',
-                          style: TextStyle(fontWeight: FontWeight.w300),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                          ),
                         )
                       ],
                     ))
@@ -79,9 +81,8 @@ class _HomePageState extends State<HomePage> {
               text: 'More',
               press: () {},
             ),
-
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               width: size.width,
               // height: 200,
               child: CarouselSlider(
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                       autoPlay: true),
                   items: imageSliders),
             ),
-              TitleWithButton(
+            TitleWithButton(
               title: 'Best For You',
               text: 'More',
               press: () {},
@@ -245,13 +246,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             )
-           
           ],
         ),
       ),
-
-  
-
     );
   }
 }
