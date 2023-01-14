@@ -44,37 +44,73 @@ class _SettingsPageState extends State<SettingsPage> {
                     ],
                   ),
                   const SizedBox(height:40),
-                  Container(
-                    color: Colors.white,
-                    child: ListTile(
-                    leading: Container(
-                      width: 30, height:30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white
-                      ),
-                      child: Icon(IconData(0xe57f, fontFamily: 'MaterialIcons'),color: Colors.blue),
-                    ),
-                    title: Text('Edit Profile', style: Theme.of(context).textTheme.bodyText1),
-                    trailing: Container(
-                      width: 40, height:40,
-                      child: IconButton(onPressed: null, icon: Icon(Icons.chevron_right)
-                      // const ImageIcon(
-                      //   AssetImage("assets/noun-chevron-1906647.png"),
-                      //   color: Colors.red,
-                      //   size: 24,
-                      // )
-                    ),
-                  )
-                  
-                  // ignore: avoid_unnecessary_containers
-                  
-                ))
+                  SettingsMenu(),
+                  SizedBox(height:5),         
+                  SettingsMenu(),
+                  SizedBox(height:5),
+                  SettingsMenu(),
+                  SizedBox(height:5),
+                  SettingsMenu(),
+                  SizedBox(height:5),
+                  SettingsMenu(),
+                  SizedBox(height:5),
+                  SettingsMenu(),
+                  SizedBox(height:5),
+                  SettingsMenu(),
                 ])));
 
 
 
   
+  }
+}
+
+class SettingsMenu extends StatelessWidget {
+  const SettingsMenu({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.onPress,
+    this.endIcon = true,
+    this.textColor,
+  }) : super(key: key);
+
+  final String title;
+  final IconData icon;
+  final VoidCallback onPress;
+  final bool endIcon;
+  final Color? textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 4000,height: 55,
+      decoration: BoxDecoration(
+         color: Colors.white,
+         borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      child: ListTile(
+      leading: Container(
+        width: 40, height:40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color.fromARGB(255, 139, 206, 225)
+        ),
+        child: Icon(IconData(0xe57f, fontFamily: 'MaterialIcons'),color: Colors.black),
+      ),
+      title: Text('Edit Profile', style: Theme.of(context).textTheme.bodyText1),
+      trailing: Container(
+        width: 40, height:40,
+        child: IconButton(onPressed: null, icon: Icon(Icons.chevron_right)
+        // const ImageIcon(
+        //   AssetImage("assets/noun-chevron-1906647.png"),
+        //   color: Colors.red,
+        //   size: 24,
+        // )
+      ),
+    )
+  
+                ),);
   }
 }
 
