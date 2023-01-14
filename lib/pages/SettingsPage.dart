@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:iconfont/iconfont.dart';
 // import 'package:flutter_concert_app/widgets/floating_button.dart';
 
 const String tProfileImage = "assets/loginImage2.png";
@@ -44,19 +45,38 @@ class _SettingsPageState extends State<SettingsPage> {
                     ],
                   ),
                   const SizedBox(height:40),
-                  SettingsMenu(),
-                  SizedBox(height:5),         
-                  SettingsMenu(),
-                  SizedBox(height:5),
-                  SettingsMenu(),
-                  SizedBox(height:5),
-                  SettingsMenu(),
-                  SizedBox(height:5),
-                  SettingsMenu(),
-                  SizedBox(height:5),
-                  SettingsMenu(),
-                  SizedBox(height:5),
-                  SettingsMenu(),
+                  SettingsMenu(
+                    title: "Edit Profile",
+                    icon: IconData(0xe57f, fontFamily: 'MaterialIcons'),
+                    textColor: Colors.black,
+                    endIcon: true,
+                    onPress: () {},
+                  ),
+                  SizedBox(height: 5),
+                  SettingsMenu(
+                    title: "Language",
+                    icon: IconData(0xe366, fontFamily: 'MaterialIcons'),
+                    textColor: Colors.black,
+                    endIcon: true,
+                    onPress: (){},
+                    ),
+                    SizedBox(height: 5),
+                    SettingsMenu(
+                      title: "Notification",
+                      icon: IconData(0xe44f, fontFamily: 'MaterialIcons'),
+                      textColor: Colors.black,
+                      endIcon: true,
+                      onPress: (){},
+                    ),
+                    SizedBox(height: 5),
+                    SettingsMenu(
+                      title: "Dark Mode",
+                      icon: IconData(0xf065d, fontFamily: 'MaterialIcons'),
+                      textColor: Colors.black,
+                      endIcon: true,
+                      onPress: (){},
+                    )
+
                 ])));
 
 
@@ -64,6 +84,8 @@ class _SettingsPageState extends State<SettingsPage> {
   
   }
 }
+
+
 
 class SettingsMenu extends StatelessWidget {
   const SettingsMenu({
@@ -90,16 +112,17 @@ class SettingsMenu extends StatelessWidget {
          borderRadius: BorderRadius.all(Radius.circular(20))
       ),
       child: ListTile(
+      onTap: onPress,  
       leading: Container(
         width: 40, height:40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Color.fromARGB(255, 139, 206, 225)
         ),
-        child: Icon(IconData(0xe57f, fontFamily: 'MaterialIcons'),color: Colors.black),
+        child: Icon(icon, color: Colors.black),
       ),
-      title: Text('Edit Profile', style: Theme.of(context).textTheme.bodyText1),
-      trailing: Container(
+      title: Text(title, style: Theme.of(context).textTheme.bodyText1?.apply(color:textColor)),
+      trailing: endIcon? Container(
         width: 40, height:40,
         child: IconButton(onPressed: null, icon: Icon(Icons.chevron_right)
         // const ImageIcon(
@@ -108,7 +131,7 @@ class SettingsMenu extends StatelessWidget {
         //   size: 24,
         // )
       ),
-    )
+    ) : null,
   
                 ),);
   }
