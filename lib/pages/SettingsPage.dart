@@ -75,7 +75,33 @@ class _SettingsPageState extends State<SettingsPage> {
                       textColor: Colors.black,
                       endIcon: true,
                       onPress: (){},
+                    ),
+                    SizedBox(height: 5),
+                    SettingsMenu(
+                      title: "Payment Method",
+                      icon: IconData(0xe481, fontFamily: 'MaterialIcons'),
+                      textColor: Colors.black,
+                      endIcon: true,
+                      onPress: (){},
+                    ),
+                    SizedBox(height: 5),
+                    SettingsMenu(
+                      title: "FAQs",
+                      icon: IconData(0xe4fa, fontFamily: 'MaterialIcons'),
+                      textColor: Colors.black,
+                      endIcon: true,
+                      onPress: (){},
+                    ),
+                    SizedBox(height: 5),
+                    SettingsMenu(
+                      title: "About App",
+                      icon: IconData(0xe33c, fontFamily: 'MaterialIcons'),
+                      textColor: Colors.black,
+                      endIcon: true,
+                      onPress: (){},
                     )
+
+                    
 
                 ])));
 
@@ -132,6 +158,7 @@ class SettingsMenu extends StatelessWidget {
         // )
       ),
     ) : null,
+    
   
                 ),);
   }
