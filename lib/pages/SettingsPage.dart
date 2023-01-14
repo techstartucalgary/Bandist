@@ -22,6 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  SizedBox(height:25),
                   Row(
                     children: [
                       SizedBox(
@@ -30,6 +31,13 @@ class _SettingsPageState extends State<SettingsPage> {
                           borderRadius: BorderRadius.circular(20.0),
                           child: Image(image: AssetImage(tProfileImage),)),
                       ),
+                      Column(
+                        children: [
+                          Text('Marcus Rashford', style: Theme.of(context).textTheme.headline6),
+                          SizedBox(height: 20),
+                          Text('mrashfordmba@gmail.com', style: Theme.of(context).textTheme.bodyText2) 
+                        ],
+                      )
                     ],
                   )
 
