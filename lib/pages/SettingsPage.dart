@@ -20,9 +20,17 @@ class _SettingsPageState extends State<SettingsPage> {
 
 
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Container(
-          color: Color.fromARGB(255, 240, 204, 226),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(255, 154, 158, 190),
+                Color.fromRGBO(254, 207, 239, 60),
+              ],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+            )
+          ),
             padding:
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: Column(
