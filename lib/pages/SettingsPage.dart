@@ -24,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
         body: Container(
           color: Color.fromARGB(255, 240, 204, 226),
             padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 11.0),
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -38,15 +38,28 @@ class _SettingsPageState extends State<SettingsPage> {
                           borderRadius: BorderRadius.circular(20.0),
                           child: Image(image: AssetImage(tProfileImage),)),
                       ),
-                      Padding(padding: EdgeInsets.only(left: 15),child: Column(
+                      Padding(padding: EdgeInsets.only(left: 10),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Marcus Rashford', style: Theme.of(context).textTheme.headline6),
-                          SizedBox(height: 20),
-                          Text('mrashfordmba@gmail.com', style: Theme.of(context).textTheme.bodyText2) 
+                          SizedBox(height: 10,),
+                          Text('mrashfordmba@gmail.com', style: Theme.of(context).textTheme.bodyText2)
                         ],
                       )),
-                      SizedBox(height: 90 , width: 90)
+                      Padding(padding: EdgeInsets.only(left: 45),
+                      child: SizedBox(
+                        height: 40,
+                        width: 30,
+                        
+                        
+                        child:FloatingActionButton(
+                        onPressed: (){
+
+                        },
+                        child: Icon(Icons.logout_rounded),
+                        backgroundColor: Color.fromARGB(255, 228, 88, 8),
+                      ))),
                     ],
                   ),
                   const SizedBox(height:25),
@@ -59,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
                     },
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                  SettingsMenu(
                     title: "Language",
                     icon: IconData(0xe366, fontFamily: 'MaterialIcons'),
@@ -67,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     endIcon: true,
                     onPress: (){},
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     SettingsMenu(
                       title: "Notification",
                       icon: IconData(0xe44f, fontFamily: 'MaterialIcons'),
@@ -75,7 +88,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       endIcon: true,
                       onPress: (){},
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     SettingsMenu(
                       title: "Dark Mode",
                       icon: IconData(0xf065d, fontFamily: 'MaterialIcons'),
@@ -83,7 +96,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       endIcon: true,
                       onPress: (){},
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     SettingsMenu(
                       title: "Payment Method",
                       icon: IconData(0xe481, fontFamily: 'MaterialIcons'),
@@ -91,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       endIcon: true,
                       onPress: (){},
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     SettingsMenu(
                       title: "FAQs",
                       icon: IconData(0xe4fa, fontFamily: 'MaterialIcons'),
@@ -99,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       endIcon: true,
                       onPress: (){},
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: 10),
                     SettingsMenu(
                       title: "About App",
                       icon: IconData(0xe33c, fontFamily: 'MaterialIcons'),
