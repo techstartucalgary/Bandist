@@ -37,7 +37,7 @@ class SettingsMenu extends StatelessWidget {
       title: Text(title, style: Theme.of(context).textTheme.bodyText1?.apply(color:textColor)),
       trailing: endIcon? Container(
         width: 40, height:40,
-        child: IconButton(onPressed: onPress, icon: Icon(Icons.chevron_right)
+        child: IconButton(onPressed: null, icon: Icon(Icons.chevron_right)
         // const ImageIcon(
         //   AssetImage("assets/noun-chevron-1906647.png"),
         //   color: Colors.red,

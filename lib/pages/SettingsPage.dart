@@ -24,8 +24,8 @@ class _SettingsPageState extends State<SettingsPage> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromRGBO(255, 154, 158, 190),
-                Color.fromRGBO(254, 207, 239, 60),
+                Color.fromRGBO(173, 216, 230, 150),
+                Color.fromRGBO(158, 201, 215, 5),
               ],
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
@@ -66,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                         },
                         child: Icon(Icons.logout_rounded),
-                        backgroundColor: Color.fromARGB(255, 228, 88, 8),
+                        backgroundColor: Color.fromARGB(255, 228, 85, 8),
                       ))),
                     ],
                   ),
