@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
+import 'package:provider/provider.dart';
 
 class ConcertCard extends StatelessWidget {
   const ConcertCard({
@@ -15,6 +16,8 @@ class ConcertCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final provider = Provider.of<fav_provider>(context);
+
     return Card(
       elevation: 3,
       child: ListTile(
@@ -35,7 +38,7 @@ class ConcertCard extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.arrow_forward_ios_rounded),
+          icon: const Icon(Icons.favorite_border),
         ),
       ),
     );
