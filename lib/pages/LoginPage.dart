@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concert_app/widgets/components/FloatingButton.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,61 +9,72 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  late final TextEditingController _email;
-  late final TextEditingController _password;
-
-  @override
-  void initState() {
-    _email = TextEditingController();
-    _password = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Page Screen'),
-      ),
-      body: Column(
-        children: [
-          TextField(
-            controller: _email,
-            keyboardType: TextInputType.emailAddress,
-            enableSuggestions: false,
-            autocorrect: false,
-            textAlign: TextAlign.center,
-            decoration: const InputDecoration(
-              hintText: "Email",
-            ),
-          ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            textAlign: TextAlign.center,
-            decoration: const InputDecoration(
-              hintText: "Password",
-            ),
-          ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-            }, 
-            child: const Text("Login"),
-            )
-        ],
-      ),
-    );
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        body: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  // ignore: avoid_unnecessary_containers
+                  Container(
+                    child: Stack(
+                      children: <Widget>[
+                        Center(
+                          child: Container(
+                            padding:
+                                const EdgeInsets.fromLTRB(15.0, 70.0, 0.0, 0.0),
+                            child: const Text(
+                              'BANDIST',
+                              style: TextStyle(
+                                  fontSize: 70.0, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //SizedBox(height: 20.0),
+                  // ignore: prefer_const_constructors
+
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: const Image(
+                          image: AssetImage('assets/images/loginImage2.png')),
+                    ),
+                  ),
+
+                  Container(
+                      padding: const EdgeInsets.only(
+                          top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
+                      child: Column(children: <Widget>[
+                        // ignore: sized_box_for_whitespace
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/bottom-bar');
+                            },
+                            child: FloatingButton(
+                              rotation: 0,
+                              text: 'LOGIN',
+                            )),
+                        const SizedBox(height: 25.0),
+                        FloatingButton(
+                          rotation: 0,
+                          text: 'SIGN UP',
+                        ),
+                        const SizedBox(height: 20.0),
+                        FloatingButton(
+                            rotation: 0,
+                            text: 'GO BACK',
+                            textColor: Colors.black,
+                            boxColor: Colors.white,
+                            shadowColor: Colors.black),
+                      ]))
+                ])));
   }
 }
