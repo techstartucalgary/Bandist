@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
             const Header(),
             const SizedBox(height: 30),
             TitleWithButton(
-              title: 'Recommended',
+              title: 'Trending',
               text: 'More',
               press: () {},
             ),
