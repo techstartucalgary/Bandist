@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:iconfont/iconfont.dart';
 import 'package:flutter_concert_app/widgets/profile_menu.dart';
@@ -32,7 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
             )
           ),
             padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -70,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ))),
                     ],
                   ),
-                  const SizedBox(height:25),
+                  const SizedBox(height:30),
                   SettingsMenu(
                     title: "Edit Profile",
                     icon: IconData(0xe57f, fontFamily: 'MaterialIcons'),
