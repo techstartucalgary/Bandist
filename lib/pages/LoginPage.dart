@@ -11,20 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  launchURL(String url) async{
-    if (await launchURL(url)){
-      await launchURL(url);
-
-    }else{
-      throw 'could not launch $url';
-    }
-
-  }
 
 
-
-
-
+  
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                         FloatingButton(
                           rotation: 0,
                           text: 'SIGN UP',
+                          url: 'https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F',
                         ),
                       ]))
                 ])));
