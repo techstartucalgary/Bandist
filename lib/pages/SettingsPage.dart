@@ -4,7 +4,7 @@ import 'package:flutter_concert_app/widgets/profile_menu.dart';
 import 'EditProfile.dart';
 // import 'package:flutter_concert_app/widgets/floating_button.dart';
 
-const String tProfileImage = "assets/loginImage2.png";
+const String tProfileImage = "assets/images/loginImage.png";
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
