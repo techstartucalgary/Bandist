@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/widgets/components/FloatingButton.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,6 +11,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  launchURL(String url) async{
+    if (await launchURL(url)){
+      await launchURL(url);
+
+    }else{
+      throw 'could not launch $url';
+    }
+
+  }
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
