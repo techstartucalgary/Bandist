@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect
 from .models import User
 from django.conf import settings
 
+import requests
+import json
+
 def login(request):
     sp_oauth = SpotifyOAuth(
         client_id=settings.SPOTIPY_CLIENT_ID,
@@ -50,34 +53,40 @@ def login_callback(request):
     return redirect('/dashboard')
 
 
+
+# SeatGeek implementation. Feel free to edit/remove it as far you wish. - Sakil
+
+def get_upcoming_events(artist_name):
+    base_url = 'https://api.seatgeek.com/2/events'
+    params = {
+        'q': artist_name,
+        'client_id': settings.SEATGEEK_CLIENT_ID,
+        'per_page': 50
+    }
+    response = requests.get(base_url, params=params)
+    return response.json()
+
+
 def dashboard(request):
+    if 'user_id' not in request.session:
+        return redirect('login')
     user_id = request.session['user_id']
     user = User.objects.get(spotify_id=user_id)
     access_token = user.access_token
     sp = spotipy.Spotify(auth=access_token)
-    # Get the user's top artists
+    # Getting the top artists
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
-    # Get the user's followed artists
-    followed_artists = sp.current_user_followed_artists(limit=50)
-    # Get the upcoming concerts for the user's top artists in their city
-    city = user.city
+    # Seatgeek concerts
     concerts = []
     for artist in top_artists['items']:
-        artist_id = artist['id']
-        # Get the artist's top tracks
-        top_tracks = sp.artist_top_tracks(artist_id)
-        track_ids = [track['id'] for track in top_tracks['tracks']]
-        # Search for events featuring the artist's top tracks
-        # events = sp.events(track_ids=track_ids)
-        # for event in events['events']:
-            # if event['venue']['city'] == city:
-                # concerts.append(event)
+        artist_name = artist['name']
+        events = get_upcoming_events(artist_name)
+        concerts.extend(events['events'])
+
     return render(request, 'dashboard.html', {
-        'display_name': user.display_name,
         'top_artists': top_artists['items'],
-        'followed_artists' : followed_artists,
+        'concerts': concerts,
     })
 
-
-
-
+def home(request):
+    return render(request, 'base.html')
