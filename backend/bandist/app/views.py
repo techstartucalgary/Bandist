@@ -31,16 +31,12 @@ def login_callback(request):
     user = sp.current_user()
     spotify_id = user['id']
     display_name = user['display_name']
-    # Check if the city field is present in the data returned by the Spotify API
     city = user.get('city', '')
-    # Check if a User object already exists for this user
     try:
         user = User.objects.get(spotify_id=spotify_id)
-        # Update the user's access token
         user.access_token = access_token
         user.save()
     except User.DoesNotExist:
-        # Create a new User object
         user = User.objects.create(
             spotify_id=spotify_id,
             display_name=display_name,
@@ -48,7 +44,6 @@ def login_callback(request):
             access_token=access_token,
             refresh_token=refresh_token,
         )
-    # Store the user's ID in a session or cookie for use in subsequent requests
     request.session['user_id'] = spotify_id
     return redirect('/dashboard')
 
@@ -68,8 +63,6 @@ def get_upcoming_events(artist_name):
 
 
 def dashboard(request):
-    if 'user_id' not in request.session:
-        return redirect('login')
     user_id = request.session['user_id']
     user = User.objects.get(spotify_id=user_id)
     access_token = user.access_token
