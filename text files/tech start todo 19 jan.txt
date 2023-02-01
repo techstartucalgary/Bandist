@@ -1,0 +1,12 @@
+1. Rhenaldi: delete unnessecary branches 
+1. see homepage 
+Rhenaldi: sign up link to spotify app store ?
+
+Axel: sign up link to spotify app store ?
+Aarsh
+Sakil: connect flutter + django
+Levi: maybe filter out by location
+2. connect flutter and django
+3. check if there is ticket/concert price info + location 
+
+
