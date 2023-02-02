@@ -69,9 +69,14 @@ class _LoginPageState extends State<LoginPage> {
                               text: 'LOGIN',
                             )),
                         const SizedBox(height: 25.0),
+                        const Text('Don\'t have a spotify account?',
+                          style:
+                          TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold ),
+                        ),
+                        const SizedBox(height: 5),
                         FloatingButton(
                           rotation: 0,
-                          text: 'SIGN UP',
+                          text: 'SIGN UP FOR SPOTIFY',
                           url: 'https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F',
                         ),
                       ]))
