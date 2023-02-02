@@ -1,0 +1,5 @@
+1. when starting django server, there is an issue 
+at /dashboard/:
+User object has no attribute access_token
+note: doesn't appear in incognito window, only when signed in
+
