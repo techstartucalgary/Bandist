@@ -34,7 +34,7 @@ pip install virtualenv
 
 3. Once installed access the project folder
 
-cd TheHiveHooks
+cd flutter-concert-app
 
 4. Create a virtual environment
 
