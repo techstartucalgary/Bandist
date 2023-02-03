@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from django.shortcuts import render, redirect
-from .models import User
+from .models import User, Artist
 from django.conf import settings
 import time
 
@@ -9,6 +9,15 @@ TOKEN_INFO = "token_info"
 
 import requests
 import json
+
+from .serializer import ArtistSerializer
+from rest_framework import viewsets
+
+
+# # Create your views here.
+class Artist(viewsets.ModelViewSet):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
 
 def login(request):
     sp_oauth = SpotifyOAuth(
@@ -37,7 +46,17 @@ def login_callback(request):
     request.session[TOKEN_INFO] = token_info
     return redirect('/getInfo')
 
+# SeatGeek implementation. Feel free to edit/remove it as far you wish. - Sakil
 
+def get_upcoming_events(artist_name):
+    base_url = 'https://api.seatgeek.com/2/events'
+    params = {
+        'q': artist_name,
+        'client_id': settings.SEATGEEK_CLIENT_ID,
+        'per_page': 50
+    }
+    response = requests.get(base_url, params=params)
+    return response.json()
 
 def getInfo(request):
         
@@ -82,33 +101,24 @@ def getInfo(request):
             display_name=user['display_name'],
         )
     request.session['user_id'] = spotify_id
-    return redirect('/dashboard')
-
-
-
-# SeatGeek implementation. Feel free to edit/remove it as far you wish. - Sakil
-
-def get_upcoming_events(artist_name):
-    base_url = 'https://api.seatgeek.com/2/events'
-    params = {
-        'q': artist_name,
-        'client_id': settings.SEATGEEK_CLIENT_ID,
-        'per_page': 50
-    }
-    response = requests.get(base_url, params=params)
-    return response.json()
-
-
-def dashboard(request):
-    user_id = request.session['user_id']
-    user = User.objects.get(spotify_id=user_id)
-    access_token = user.access_token
-    sp = spotipy.Spotify(auth=access_token)
-    # Getting the top artists
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
+    following_artists = sp.current_user_followed_artists(limit=20, after=None)
+    
+    
+    # print(len(following_artists['artists']['items']))
+    print('reached here _____________________---')
     # Seatgeek concerts
     concerts = []
-    for artist in top_artists['items']:
+    for artist in following_artists['artists']['items']:
+        artist_id = artist['id']
+        # try:
+        artist = Artist.objects.get(artist_id=artist_id)
+        artist.save()
+        # except Artist.DoesNotExist:
+        #     artist = Artist.objects.create(
+        #     artist_id=artist['id'],
+        #     artist_name=artist['name'],
+        # )
         artist_name = artist['name']
         events = get_upcoming_events(artist_name)
         concerts.extend(events['events'])
@@ -117,6 +127,30 @@ def dashboard(request):
         'top_artists': top_artists['items'],
         'concerts': concerts,
     })
+
+
+
+
+
+
+# def dashboard(request):
+#     user_id = request.session['user_id']
+#     user = User.objects.get(spotify_id=user_id)
+#     access_token = user.access_token
+#     sp = spotipy.Spotify(auth=access_token)
+#     # Getting the top artists
+#     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
+#     # Seatgeek concerts
+#     concerts = []
+#     for artist in top_artists['items']:
+#         artist_name = artist['name']
+#         events = get_upcoming_events(artist_name)
+#         concerts.extend(events['events'])
+
+#     return render(request, 'dashboard.html', {
+#         'top_artists': top_artists['items'],
+#         'concerts': concerts,
+#     })
 
 def home(request):
     return render(request, 'base.html')

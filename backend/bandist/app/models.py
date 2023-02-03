@@ -9,3 +9,8 @@ class User(models.Model):
 
     class Meta:
         app_label = 'app'
+
+class Artist(models.Model):
+    artist_id = models.CharField(max_length=255, unique=True)
+    artist_name = models.CharField(max_length=100)
+    

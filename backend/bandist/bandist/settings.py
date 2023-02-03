@@ -25,7 +25,7 @@ SECRET_KEY = "ui0pp)dodxk_wpwzbkn_@^mz-bq&^%c%h#8a(p-8my#y0oc1n1"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -124,8 +125,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #SPOTIPY
-SPOTIPY_CLIENT_ID = "d4aa56ab1e3243168d3be322b8cad9af"
-SPOTIPY_CLIENT_SECRET = "831695beab5c4d5e9c8f2bc42bdbe422"
+SPOTIPY_CLIENT_ID = "73179dc2625a435f8a3672b3379ceadd"
+SPOTIPY_CLIENT_SECRET = "74a1523073d9411ab200160c41f7e07f"
 SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/"
 
 #SEATGEEK
