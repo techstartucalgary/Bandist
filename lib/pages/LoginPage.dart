@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/widgets/components/FloatingButton.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,6 +11,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   Container(
                       padding: const EdgeInsets.only(
-                          top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
+                          top: 0.0, left: 20.0, right: 20.0, bottom: 50.0),
                       child: Column(children: <Widget>[
                         // ignore: sized_box_for_whitespace
                         GestureDetector(
@@ -60,20 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: FloatingButton(
                               rotation: 0,
-                              text: 'LOGIN',
+                              text: 'GET STARTED',
+                              url : 'https://accounts.spotify.com/en/login',
                             )),
-                        const SizedBox(height: 25.0),
-                        FloatingButton(
-                          rotation: 0,
-                          text: 'SIGN UP',
-                        ),
-                        const SizedBox(height: 20.0),
-                        FloatingButton(
-                            rotation: 0,
-                            text: 'GO BACK',
-                            textColor: Colors.black,
-                            boxColor: Colors.white,
-                            shadowColor: Colors.black),
+                
+
                       ]))
                 ])));
   }
