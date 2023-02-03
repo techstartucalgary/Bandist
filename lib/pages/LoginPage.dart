@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   Container(
                       padding: const EdgeInsets.only(
-                          top: 0.0, left: 20.0, right: 20.0, bottom: 20.0),
+                          top: 0.0, left: 20.0, right: 20.0, bottom: 50.0),
                       child: Column(children: <Widget>[
                         // ignore: sized_box_for_whitespace
                         GestureDetector(
@@ -66,20 +66,10 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: FloatingButton(
                               rotation: 0,
-                              text: 'LOGIN',
+                              text: 'GET STARTED',
                               url : 'https://accounts.spotify.com/en/login',
                             )),
-                        const SizedBox(height: 25.0),
-                        FloatingButton(
-                          rotation: 0,
-                          text: 'SIGN UP FOR SPOTIFY',
-                          url: 'https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F',
-                        ),
-                        const SizedBox(height: 7),
-                         const Text('Don\'t have a Spotify account?',
-                          style:
-                          TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, color: Color.fromARGB(255, 100, 146, 169)),
-                        ),
+                
 
                       ]))
                 ])));
