@@ -72,6 +72,7 @@ def getInfo(request):
     spotify_id = user['id']
     display_name = user['display_name']
     city = user.get('city', '')
+    
     try:
         user = User.objects.get(spotify_id=spotify_id)
         user.access_token = access_token
@@ -82,7 +83,20 @@ def getInfo(request):
             display_name=user['display_name'],
         )
     request.session['user_id'] = spotify_id
-    return redirect('/dashboard')
+    top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
+    follow_artists = sp.current_user_followed_artists(limit= 20, after= None)
+    # Seatgeek concerts
+    concerts = []
+    for artist in follow_artists['artists']['items']:
+        artist_name = artist['name']
+        events = get_upcoming_events(artist_name)
+        concerts.extend(events['events'])
+
+    return render(request, 'dashboard.html', {
+        'top_artists': top_artists['items'],
+        'concerts': concerts,
+    })
+    # return redirect('/dashboard')
 
 
 
