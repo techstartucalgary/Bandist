@@ -1,26 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.6/tailwind.min.css">
-    <title>Upcoming concerts for your top artists</title>
-</head>
-<body class="bg-lilac-lightest">
-    <div class="mx-auto p-6">
-        <h1 class="text-center text-lg font-medium text-lilac-dark">Upcoming concerts for your top artists</h1>
-        <div class="mt-6">
-            <div class="bg-white rounded-lg p-6">
-                <h2 class="text-lilac-500 text-2xl font-medium mb-4">Upcoming Events</h2>
-                {% for concert in concerts %}
-                <div class="mb-4">
-                    <h3 class="text-lilac-800 text-lg font-medium mb-2">{{ concert.title }}</h3>
-                    <div class="text-gray-600 mb-2">{{ concert.datetime_local|date:'F d, Y' }}</div>
-                    <div class="text-gray-600 mb-2">{{ concert.venue.city }}, {{ concert.venue.state }}</div>
-                    <div class="text-gray-600 mb-2">Min Price: {{ concert.stats.lowest_price }} - Max Price: {{ concert.stats.highest_price }}</div>
-                    <a href="{{ concert.url }}" class="text-lilac-500 hover:text-lilac-800">Buy Tickets</a>
-                </div>
-                {% endfor %}
-            </div>            
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex">
+    <div class="bg-gray-800 text-white h-screen w-1/4 p-4">
+        <div class="text-2xl font-medium mb-4">Top Artists</div>
+        <div class="overflow-y-scroll h-full">
+            {% for artist in top_artists %}
+            <div class="mb-4">
+            <a href="#{{ artist.name|slugify }}" class="text-lilac-dark hover:underline">{{ artist.name }}</a>
+            </div>
+            {% endfor %}
         </div>
     </div>
-</body>
-</html>
+      
+    <div class="w-3/4 p-4">
+        {% for artist in top_artists %}
+        <h3 class="text-lg font-medium mb-2" id="{{ artist.name|slugify }}">Upcoming concerts for {{ artist.name }}</h3>
+        <div class="bg-white rounded-lg p-4">
+            {% for concert in concerts %}
+            {% if concert.performers.0.name == artist.name %}
+            <div class="mb-4">
+                <h4 class="text-lilac-dark font-medium">{{ concert.title }}</h4>
+                <p>Date: {{ concert.datetime_local|date:'D M d, Y' }}</p>
+                <p>City: {{ concert.venue.city }}</p>
+                <p>Min Price: {{ concert.stats.lowest_price }}</p>
+                <p>Max Price: {{ concert.stats.highest_price }}</p>
+                <p><a href="{{ concert.url }}" class="text-lilac-dark hover:underline">Ticket URL</a></p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% if not concerts %}
+            <p>No upcoming concerts</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    
+</div>
+{% endblock %}

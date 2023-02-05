@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandist</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Add CSS styles*/
+        body {
+            background-color: #f8c291;
+        }
+        .navbar {
+            background-color: #4b55c5;
+        }
+        .nav-link {
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            background-color: #3b3f5c;
+        }
+    </style>
+</head>
+<body class="bg-sky-300 text-white">
+    <header class="bg-purple-800 text-white">
+        <nav class="navbar flex items-center justify-between flex-wrap p-6">
+            <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                <div class="text-sm lg:flex-grow">
+                    <a href="{% url 'login' %}" class="block mt-4 lg:inline-block lg:mt-0 mr-4 nav-link">
+                        Login
+                    </a>
+                    <a href="{% url 'dashboard' %}" class="block mt-4 lg:inline-block lg:mt-0 mr-4 nav-link">
+                        Dashboard
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mx-auto">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
