@@ -70,6 +70,8 @@ def dashboard(request):
     # Getting the top artists
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
     # Seatgeek concerts
+    user_name=sp.current_user()
+    print(user_name)
     concerts = []
     for artist in top_artists['items']:
         artist_name = artist['name']
