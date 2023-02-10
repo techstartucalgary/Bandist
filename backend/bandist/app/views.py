@@ -3,6 +3,9 @@ from spotipy.oauth2 import SpotifyOAuth
 from django.shortcuts import render, redirect
 from .models import User
 from django.conf import settings
+import time
+
+TOKEN_INFO = "token_info"
 
 import requests
 import json
@@ -15,20 +18,58 @@ def login(request):
         scope='user-read-private user-read-email user-library-read user-follow-read user-top-read',
     )
     login_url = sp_oauth.get_authorize_url()
+
     return redirect(login_url)
 
 def login_callback(request):
+    cache_handler = spotipy.cache_handler.MemoryCacheHandler()
+
     authorization_code = request.GET.get('code')
     sp_oauth = SpotifyOAuth(
         client_id=settings.SPOTIPY_CLIENT_ID,
         client_secret=settings.SPOTIPY_CLIENT_SECRET,
         redirect_uri=settings.SPOTIPY_REDIRECT_URI,
+        cache_handler=cache_handler,
     )
     token_info = sp_oauth.get_access_token(authorization_code)
+    request.session.create()
+
+    request.session[TOKEN_INFO] = token_info
+    return redirect('/getInfo')
+
+
+
+def getInfo(request):
+        
+    token_info = request.session.get(TOKEN_INFO, None)
+   
+    if not token_info:
+        redirect_uri = settings.SPOTIPY_REDIRECT_URI
+        sp_oauth = SpotifyOAuth(
+            client_id=settings.SPOTIPY_CLIENT_ID,
+            client_secret=settings.SPOTIPY_CLIENT_SECRET,
+            redirect_uri=redirect_uri,
+            scope=["user-library-read","user-top-read"] #here you can specify scopes 
+        )
+        auth_url = sp_oauth.get_authorize_url()
+        return redirect(auth_url)
+
+    now = int(time.time())
+    is_expired = token_info['expires_at'] - now < 60
+    if is_expired:
+        sp_oauth = SpotifyOAuth(
+            client_id=settings.SPOTIPY_CLIENT_ID,
+            client_secret=settings.SPOTIPY_CLIENT_SECRET,
+            redirect_uri=settings.SPOTIPY_REDIRECT_URI,
+            scope=["user-library-read","user-top-read"]
+        )
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+        request.session[TOKEN_INFO] = token_info
+
     access_token = token_info['access_token']
-    refresh_token = token_info['refresh_token']
     sp = spotipy.Spotify(auth=access_token)
     user = sp.current_user()
+    print(user)
     spotify_id = user['id']
     display_name = user['display_name']
     city = user.get('city', '')
@@ -38,11 +79,8 @@ def login_callback(request):
         user.save()
     except User.DoesNotExist:
         user = User.objects.create(
-            spotify_id=spotify_id,
-            display_name=display_name,
-            city=city,
-            access_token=access_token,
-            refresh_token=refresh_token,
+            spotify_id=user['id'],
+            display_name=user['display_name'],
         )
     request.session['user_id'] = spotify_id
     return redirect('/dashboard')
@@ -70,8 +108,6 @@ def dashboard(request):
     # Getting the top artists
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
     # Seatgeek concerts
-    user_name=sp.current_user()
-    print(user_name)
     concerts = []
     for artist in top_artists['items']:
         artist_name = artist['name']
