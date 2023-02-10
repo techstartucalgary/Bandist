@@ -3,6 +3,7 @@ import 'package:flutter_concert_app/constants/ColorConstants.dart';
 import 'package:flutter_concert_app/provider/fav_provider.dart';
 import 'package:flutter_concert_app/widgets/BottomBar.dart';
 import 'package:flutter_concert_app/pages/ConcertsPage.dart';
+import 'package:flutter_concert_app/pages/MapsPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'pages/HomePage.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
             '/bottom-bar': (context) => const BottomBar(),
             '/home': (context) => const HomePage(),
             '/concerts': (context) => const ConcertsPage(),
+            '/map': (context) => const MapsPage(),
           },
         ));
   }

@@ -10,9 +10,20 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: kPrimaryColor,
       leading: Container(
         margin: const EdgeInsets.only(left: 15, top: 5),
-        child: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            // IconButton(
+            //   icon: const Icon(Icons.menu),
+            //   onPressed: () {},
+            // ),
+            IconButton(
+              icon: const Icon(Icons.pin_drop),
+              onPressed: () {
+                Navigator.pushNamed(context, '/map');
+              },
+            ),
+          ],
         ),
       ),
     );
