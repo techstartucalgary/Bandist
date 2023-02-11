@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
+import 'package:flutter_concert_app/pages/PrivacyPage.dart';
+import 'package:flutter_concert_app/pages/SettingsPage.dart';
 import 'package:flutter_concert_app/provider/fav_provider.dart';
 import 'package:flutter_concert_app/widgets/BottomBar.dart';
 import 'package:flutter_concert_app/pages/ConcertsPage.dart';
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             //scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)
           ),
-          home: const LoginPage(),
+          home: const SettingsPage(),
           routes: {
             // When navigating to the "/" route, build the HomePage widget.
             // When navigating to the "/login" route, build the LoginPage widget.
@@ -51,6 +53,7 @@ class MyApp extends StatelessWidget {
             '/bottom-bar': (context) => const BottomBar(),
             '/home': (context) => const HomePage(),
             '/concerts': (context) => const ConcertsPage(),
+            '/privacy': (context) => const PrivacyPage(),
           },
         ));
   }
