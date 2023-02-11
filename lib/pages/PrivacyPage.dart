@@ -74,6 +74,8 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   trailing: IconButton(
                     onPressed: () {
                       _getCurrentPosition();
+                      print(_currentPosition?.latitude);
+                      print(_currentPosition?.longitude);
                     },
                     icon: Icon(_currentAddress != null
                         ? Icons.location_on
@@ -95,9 +97,9 @@ class _PrivacyPageState extends State<PrivacyPage> {
                       color: kTextColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    "coming soon",
-                    style: TextStyle(
+                  subtitle: Text(
+                    'LAT: ${_currentPosition?.latitude ?? ""}',
+                    style: const TextStyle(
                       color: kTextColor,
                       fontWeight: FontWeight.w200,
                     ),
@@ -122,9 +124,9 @@ class _PrivacyPageState extends State<PrivacyPage> {
                       color: kTextColor,
                     ),
                   ),
-                  subtitle: const Text(
-                    "coming soon",
-                    style: TextStyle(
+                  subtitle: Text(
+                    'LNG: ${_currentPosition?.longitude ?? ""}',
+                    style: const TextStyle(
                       color: kTextColor,
                       fontWeight: FontWeight.w200,
                     ),
