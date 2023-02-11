@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             //scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)
           ),
-          home: const SettingsPage(),
+          home: const LoginPage(),
           routes: {
             // When navigating to the "/" route, build the HomePage widget.
             // When navigating to the "/login" route, build the LoginPage widget.
