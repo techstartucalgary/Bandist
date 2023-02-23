@@ -74,8 +74,6 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   trailing: IconButton(
                     onPressed: () {
                       _getCurrentPosition();
-                      print(_currentPosition?.latitude);
-                      print(_currentPosition?.longitude);
                     },
                     icon: Icon(_currentAddress != null
                         ? Icons.location_on
