@@ -10,20 +10,9 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: kPrimaryColor,
       leading: Container(
         margin: const EdgeInsets.only(left: 15, top: 5),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            // IconButton(
-            //   icon: const Icon(Icons.menu),
-            //   onPressed: () {},
-            // ),
-            IconButton(
-              icon: const Icon(Icons.pin_drop),
-              onPressed: () {
-                Navigator.pushNamed(context, '/map');
-              },
-            ),
-          ],
+        child: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {},
         ),
       ),
     );
@@ -32,3 +21,28 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+
+
+// AppBar(
+//       toolbarHeight: 40,
+//       elevation: 0,
+//       backgroundColor: kPrimaryColor,
+//       leading: Container(
+//         margin: const EdgeInsets.only(left: 15, top: 5),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: <Widget>[
+//             IconButton(
+//               icon: const Icon(Icons.menu),
+//               onPressed: () {},
+//             ),
+//             IconButton(
+//               icon: const Icon(Icons.pin_drop),
+//               onPressed: () {
+//                 Navigator.pushNamed(context, '/map');
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );

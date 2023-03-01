@@ -36,9 +36,20 @@ class ConcertCard extends StatelessWidget {
             fontWeight: FontWeight.w200,
           ),
         ),
-        trailing: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.favorite_border),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.favorite_border),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/map');
+              },
+              icon: const Icon(Icons.pin_drop),
+            ),
+          ],
         ),
       ),
     );
