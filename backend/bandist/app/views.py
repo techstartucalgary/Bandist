@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .models import User
 from django.conf import settings
 import time
+from .tool import location_tools as LT
 
 TOKEN_INFO = "token_info"
 
@@ -107,17 +108,31 @@ def dashboard(request):
     sp = spotipy.Spotify(auth=access_token)
     # Getting the top artists
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
+    f = sp.current_user_followed_artists(limit=20, after=None)
     # Seatgeek concerts
     concerts = []
-    for artist in top_artists['items']:
+    # for artist in top_artists['items']:
+    #     artist_name = artist['name']
+    for artist in f['artists']['items']:
         artist_name = artist['name']
         events = get_upcoming_events(artist_name)
+        print(events)
+        for i in events:
+            # print(i)
+            # print(i["venue"])
+            pass
+
+        
         concerts.extend(events['events'])
 
+    # print(concerts[0])
+
     return render(request, 'dashboard.html', {
-        'top_artists': top_artists['items'],
+        # 'top_artists': top_artists['items'],
+        'top_artists': f['artists']['items'],
         'concerts': concerts,
     })
 
 def home(request):
     return render(request, 'home.html')
+
