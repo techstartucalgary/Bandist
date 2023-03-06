@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
+import 'package:flutter_concert_app/widgets/profile_menu.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -15,6 +16,22 @@ class PrivacyPage extends StatefulWidget {
 class _PrivacyPageState extends State<PrivacyPage> {
   String? _currentAddress;
   Position? _currentPosition;
+  bool _locationEnabled = false;
+
+  void _toggleLocationEnabled(bool value) {
+    setState(() {
+      _locationEnabled = value;
+    });
+    if (!_locationEnabled) {
+      setState(() {
+        _currentAddress = "";
+      });
+      setState(() {
+        _currentPosition = null;
+      });
+    }
+    _getCurrentPosition();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,95 +64,60 @@ class _PrivacyPageState extends State<PrivacyPage> {
           ),
         ),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 15),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                elevation: 3,
-                child: ListTile(
-                  // leading: Text("Location"),
-                  title: const Text(
-                    "Location",
-                    style: TextStyle(
-                      color: kTextColor,
-                    ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
                   ),
-                  subtitle: Text(
-                    _currentAddress ?? "Disabled",
-                    style: const TextStyle(
-                      color: kTextColor,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      _getCurrentPosition();
-                    },
-                    icon: Icon(_currentAddress != null
-                        ? Icons.location_on
-                        : Icons.location_off),
+                  child: SwitchListTile(
+                    title: const Text('Location'),
+                    value: _locationEnabled,
+                    onChanged: _toggleLocationEnabled,
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                elevation: 3,
-                child: ListTile(
-                  // leading: Text("Location"),
-                  title: const Text(
-                    "Another privacy setting",
-                    style: TextStyle(
-                      color: kTextColor,
+                const SizedBox(height: 15),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  elevation: 3,
+                  child: ListTile(
+                    // leading: Text("Location"),
+                    title: Text(
+                      _locationEnabled
+                          ? _currentAddress ?? "Disabled"
+                          : "Disabled",
+                      style: const TextStyle(
+                        color: kTextColor,
+                      ),
+                    ),
+                    subtitle: Text(
+                      _locationEnabled
+                          ? 'LAT: ${_currentPosition?.latitude ?? ""} LNG: ${_currentPosition?.longitude ?? ""}'
+                          : "",
+                      style: const TextStyle(
+                        color: kTextColor,
+                        fontWeight: FontWeight.w200,
+                      ),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () {
+                        _getCurrentPosition();
+                      },
+                      icon: Icon(_locationEnabled
+                          ? Icons.location_on
+                          : Icons.location_off),
                     ),
                   ),
-                  subtitle: Text(
-                    'LAT: ${_currentPosition?.latitude ?? ""}',
-                    style: const TextStyle(
-                      color: kTextColor,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.construction),
-                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                elevation: 3,
-                child: ListTile(
-                  // leading: Text("Location"),
-                  title: const Text(
-                    "Another privacy setting",
-                    style: TextStyle(
-                      color: kTextColor,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'LNG: ${_currentPosition?.longitude ?? ""}',
-                    style: const TextStyle(
-                      color: kTextColor,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.construction),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
