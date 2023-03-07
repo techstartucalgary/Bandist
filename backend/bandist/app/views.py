@@ -10,7 +10,6 @@ TOKEN_INFO = "token_info"
 
 import requests
 import json
-
 def login(request):
     sp_oauth = SpotifyOAuth(
         client_id=settings.SPOTIPY_CLIENT_ID,
@@ -100,6 +99,27 @@ def get_upcoming_events(artist_name):
     response = requests.get(base_url, params=params)
     return response.json()
 
+def get_concerts_in_radius(artists:list, radius:float=1000.0)->"list[dict]":
+    """
+    artists: spitipy artist list
+    radius: search radius in km
+    
+    returns: list of seatgeek concert dicts
+    """
+    concerts=[]
+    userlocation=LT.get_user_location()
+    for artist in artists['artists']['items']:
+        artist_name = artist['name']
+        events = get_upcoming_events(artist_name)
+        try:
+            for event in events["events"]:
+                # print(f"{event['venue']['location']} distance: {LT.lat_long_distance(userlocation,event['venue']['location'])}")
+                if LT.lat_long_distance(userlocation,event['venue']['location'])< radius:
+                    concerts.append(event)
+        except Exception as e:
+            print("no location", e)
+            pass
+    return concerts
 
 def dashboard(request):
     user_id = request.session['user_id']
@@ -108,28 +128,13 @@ def dashboard(request):
     sp = spotipy.Spotify(auth=access_token)
     # Getting the top artists
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
-    f = sp.current_user_followed_artists(limit=20, after=None)
-    # Seatgeek concerts
-    concerts = []
-    # for artist in top_artists['items']:
-    #     artist_name = artist['name']
-    for artist in f['artists']['items']:
-        artist_name = artist['name']
-        events = get_upcoming_events(artist_name)
-        print(events)
-        for i in events:
-            # print(i)
-            # print(i["venue"])
-            pass
+    followed_artists = sp.current_user_followed_artists(limit=20, after=None) 
 
-        
-        concerts.extend(events['events'])
-
-    # print(concerts[0])
+    concerts = get_concerts_in_radius(followed_artists,radius = 1000)
 
     return render(request, 'dashboard.html', {
         # 'top_artists': top_artists['items'],
-        'top_artists': f['artists']['items'],
+        'top_artists': followed_artists['artists']['items'],
         'concerts': concerts,
     })
 
