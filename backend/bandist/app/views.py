@@ -101,10 +101,11 @@ def get_upcoming_events(artist_name):
 
 def get_concerts_in_radius(artists:list, radius:float=1000.0)->"list[dict]":
     """
+    
     artists: spitipy artist list
     radius: search radius in km
     
-    returns: list of seatgeek concert dicts
+    returns: list of seatgeek concert dicts in the given radius from the user
     """
     concerts=[]
     userlocation=LT.get_user_location()
@@ -130,7 +131,7 @@ def dashboard(request):
     top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')
     followed_artists = sp.current_user_followed_artists(limit=20, after=None) 
 
-    concerts = get_concerts_in_radius(followed_artists,radius = 1000)
+    concerts = get_concerts_in_radius(followed_artists,radius =2500)
 
     return render(request, 'dashboard.html', {
         # 'top_artists': top_artists['items'],
