@@ -32,21 +32,31 @@ def login_callback(request):
     spotify_id = user['id']
     display_name = user['display_name']
     city = user.get('city', '')
+    favorite_artists = ','.join([artist['name'] for artist in sp.current_user_top_artists(limit=50, time_range='short_term')['items']])
     try:
         user = User.objects.get(spotify_id=spotify_id)
         user.access_token = access_token
+        user.location = city
+        user.favorite_artists = favorite_artists
         user.save()
     except User.DoesNotExist:
         user = User.objects.create(
             spotify_id=spotify_id,
             display_name=display_name,
-            city=city,
+            location=city,
+            favorite_artists=favorite_artists,
             access_token=access_token,
             refresh_token=refresh_token,
         )
     request.session['user_id'] = spotify_id
     return redirect('/dashboard')
 
+def logout(request):
+    # Clear the user's session data
+    request.session.clear()
+    
+    # Redirect to the home page
+    return redirect('home')
 
 
 # SeatGeek implementation. Feel free to edit/remove it as far you wish. - Sakil
