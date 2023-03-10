@@ -6,6 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import '../widgets/components/TitleAndButton.dart';
 import '../widgets/home page/Cards.dart';
+import '../widgets/components/SearchBar.dart';
 
 @immutable
 class MockDataItem {
@@ -157,6 +158,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const Header(),
+            Positioned(
+              bottom: 30.0,
+              child: const SearchBar(),
+            ),
             const SizedBox(height: 30),
             TitleWithButton(
               title: 'Recommended',
