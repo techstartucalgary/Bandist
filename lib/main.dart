@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
+import 'package:flutter_concert_app/pages/PrivacyPage.dart';
+import 'package:flutter_concert_app/pages/SettingsPage.dart';
 import 'package:flutter_concert_app/provider/fav_provider.dart';
 import 'package:flutter_concert_app/widgets/BottomBar.dart';
 import 'package:flutter_concert_app/pages/ConcertsPage.dart';
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
             '/home': (context) => const HomePage(),
             '/concerts': (context) => const ConcertsPage(),
             '/map': (context) => const MapsPage(),
+            '/privacy': (context) => const PrivacyPage(),
           },
         ));
   }

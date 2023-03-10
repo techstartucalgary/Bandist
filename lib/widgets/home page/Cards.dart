@@ -19,9 +19,15 @@ class ConcertCard extends StatelessWidget {
     // final provider = Provider.of<fav_provider>(context);
 
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
       elevation: 3,
       child: ListTile(
-        leading: Image.network(image),
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image.network(image),
+        ),
         title: Text(
           title,
           style: const TextStyle(
