@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapsPage extends StatefulWidget {
   const MapsPage({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class MapsPage extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapsPage> {
+  Position? _currentPosition;
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
@@ -18,11 +22,11 @@ class MapSampleState extends State<MapsPage> {
     zoom: 14.4746,
   );
 
-  static const CameraPosition _kMe = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(51.048615, -114.070847),
-      tilt: 59.440717697143555,
-      zoom: 30);
+  // static const CameraPosition _kMe = CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(51.048615, -114.070847),
+  //     tilt: 59.440717697143555,
+  //     zoom: 30);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,27 @@ class MapSampleState extends State<MapsPage> {
   }
 
   Future<void> _goToTheMe() async {
+    await _getCurrentPosition();
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kMe));
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        bearing: 192.8334901395799,
+        target: LatLng(_currentPosition!.latitude.toDouble(),
+            _currentPosition!.longitude.toDouble()),
+        tilt: 59.440717697143555,
+        zoom: 30)));
+  }
+
+  Future<void> _getCurrentPosition() async {
+    final prefs = await SharedPreferences.getInstance();
+    // final bool? hasPermission = await prefs.getBool('LocationPermission');
+    final bool? hasPermission = true;
+    if (hasPermission == null) return;
+    if (!hasPermission) return;
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) {
+      setState(() => _currentPosition = position);
+    }).catchError((e) {
+      debugPrint(e);
+    });
   }
 }
