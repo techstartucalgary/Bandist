@@ -158,10 +158,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const Header(),
-            Positioned(
-              bottom: 30.0,
-              child: const SearchBar(),
-            ),
+            const SearchBar(),
             const SizedBox(height: 30),
             TitleWithButton(
               title: 'Recommended',

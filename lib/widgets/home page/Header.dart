@@ -41,7 +41,6 @@ class Header extends StatelessWidget {
                   ],
                 ),
               ),
-              // SearchBar(),
             ],
           ),
         )

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
-import 'package:flutter_concert_app/widgets/profile_menu.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
