@@ -1,22 +1,41 @@
-<h1>{{ display_name }}'s Dashboard</h1>
+{% extends 'base.html' %}
 
-<h2>Top Artists</h2>
-<ul>
-{% for artist in top_artists %}
-    <li>{{ artist.name }}</li>
-{% endfor %}
-</ul>
+{% block content %}
+<div class="flex">
+    <div class="bg-gray-800 text-white h-screen w-1/4 p-4">
+        <div class="text-2xl font-medium mb-4">Top Artists</div>
+        <div class="overflow-y-scroll h-full">
+            {% for artist in top_artists %}
+            <div class="mb-4">
+            <a href="#{{ artist.name|slugify }}" class="text-lilac-dark hover:underline">{{ artist.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+      
+    <div class="w-3/4 p-4">
+        {% for artist in top_artists %}
+        <h3 class="text-lg font-medium mb-2" id="{{ artist.name|slugify }}">Upcoming concerts for {{ artist.name }}</h3>
+        <div class="bg-white rounded-lg p-4">
+            {% for concert in concerts %}
+            {% if concert.performers.0.name == artist.name %}
+            <div class="mb-4">
+                <h4 class="text-lilac-dark font-medium">{{ concert.title }}</h4>
+                <p>Date: {{ concert.datetime_local|date:'D M d, Y' }}</p>
+                <p>City: {{ concert.venue.city }}</p>
+                <p>Min Price: {{ concert.stats.lowest_price }}</p>
+                <p>Max Price: {{ concert.stats.highest_price }}</p>
+                <p><a href="{{ concert.url }}" class="text-lilac-dark hover:underline">Ticket URL</a></p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% if not concerts %}
+            <p>No upcoming concerts</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 
-<h2>Upcoming Concert in {{ city }}</h2>
-<ul>
-{% for concert in concerts %}
-    <li>{{ concert.name }} at {{ concert.venue.name }} on {{ concert.datetime|date:'M j, Y' }}</li>
-{% endfor %}
-</ul>
-
-<h2>Followed Artists</h2>
-<ul>
-{% for artist in followed_artists %}
-    <li>{{ artist.name }}</li>
-{% endfor %}
-</ul>
+    
+</div>
+{% endblock %}
