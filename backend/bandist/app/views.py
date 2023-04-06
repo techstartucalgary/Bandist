@@ -102,14 +102,20 @@
 #         'top_artists': top_artists['items'],
 #     })
 
+
+
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from django.shortcuts import render, redirect
-from .models import User
+from .models import User, Artist, Concert
 from django.conf import settings
+# from django.contrib.auth.models import User, Artist
+from rest_framework import viewsets, mixins, generics
+from .serializers import ArtistSerializer, ConcertSerializer, UserSerializer
 
 import requests
 import json
+
 
 def login(request):
     sp_oauth = SpotifyOAuth(
@@ -122,15 +128,24 @@ def login(request):
     return redirect(login_url)
 
 def login_callback(request):
+    cache_handler = spotipy.cache_handler.MemoryCacheHandler()
+
+    print(
+        'reached here ______________________'
+    )
     authorization_code = request.GET.get('code')
     sp_oauth = SpotifyOAuth(
         client_id=settings.SPOTIPY_CLIENT_ID,
         client_secret=settings.SPOTIPY_CLIENT_SECRET,
         redirect_uri=settings.SPOTIPY_REDIRECT_URI,
+        cache_handler=cache_handler,
     )
+    print(authorization_code)
     token_info = sp_oauth.get_access_token(authorization_code)
+    print(token_info)
     access_token = token_info['access_token']
     refresh_token = token_info['refresh_token']
+    print(access_token)
     sp = spotipy.Spotify(auth=access_token)
     user = sp.current_user()
     spotify_id = user['id']
@@ -189,18 +204,32 @@ def dashboard(request):
     followed_artists = sp.current_user_followed_artists(limit=20, after=None)
    
     # Seatgeek concerts
-    # concerts = []
-    # for artist in top_artists['items']:
-    #     artist_name = artist['name']
-    #     events = get_upcoming_events(artist_name)
-    #     concerts.extend(events['events'])
-
     concerts = []
-    for artist in followed_artists['artists']['items']:
+    for artist in top_artists['items']:
         artist_name = artist['name']
         events = get_upcoming_events(artist_name)
         concerts.extend(events['events'])
 
+    # concerts = []
+    # for artist in followed_artists['artists']['items']:
+    #     # artist_id = artist['id']
+    #     artist_name = artist['name']
+    #     events = get_upcoming_events(artist_name)
+    #     concerts.extend(events['events'])
+    #     try:
+    #         user = Artist.objects.get()
+    #         user.name = artist_name
+    #         user.concerts = concerts
+    #         user.save()
+    #     except User.DoesNotExist:
+    #         user = User.objects.create(
+    #         name = artist_name,
+    #         concerts = concerts
+    #     )
+
+    #     print(artist)
+
+    
     return render(request, 'dashboard.html', {
         'top_artists': followed_artists['artists']['items'],
         'concerts': concerts,

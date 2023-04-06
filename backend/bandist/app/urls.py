@@ -8,9 +8,13 @@
 #     path('getInfo', views.getInfo, name='get_info'),
 # ]
 
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib import admin
+from rest_framework import routers
+
+# router = routers.DefaultRouter()
+# router.register('concerts', views.ArtistViewSet)
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -19,4 +23,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('admin/', admin.site.urls),
     path('logout/', views.logout, name='logout'),
+    
 ]
