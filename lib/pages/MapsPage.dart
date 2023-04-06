@@ -44,17 +44,21 @@ class MapSampleState extends State<MapsPage> {
 
   @override
   Widget build(BuildContext context) {
-    _getCurrentPosition(); // am I supposed to call this here?
-    _createPolylines();
+    // _getCurrentPosition(); // am I supposed to call this here?
+    // _createPolylines();
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
-        polylines: _polylines,
+        // polylines: _polylines,
         initialCameraPosition: CameraPosition(
-          target: LatLng(_currentPosition.latitude.toDouble(),
-              _currentPosition.longitude.toDouble()),
+          target: LatLng(37.42796133580664, -122.085749655962),
           zoom: 14.4746,
         ),
+        // initialCameraPosition: CameraPosition(
+        //   target: LatLng(_currentPosition.latitude.toDouble(),
+        //       _currentPosition.longitude.toDouble()),
+        //   zoom: 14.4746,
+        // ),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
