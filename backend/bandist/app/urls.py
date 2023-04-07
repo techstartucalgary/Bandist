@@ -12,6 +12,7 @@ from django.urls import path, include
 from . import views
 from django.contrib import admin
 from rest_framework import routers
+from .views import ArtistAV, ConcertAV
 
 # router = routers.DefaultRouter()
 # router.register('concerts', views.ArtistViewSet)
@@ -23,5 +24,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('admin/', admin.site.urls),
     path('logout/', views.logout, name='logout'),
+    path('artists/', ArtistAV.as_view(), name='artists'),
+    path('concerts/', ConcertAV.as_view(), name='concerts')
     
 ]

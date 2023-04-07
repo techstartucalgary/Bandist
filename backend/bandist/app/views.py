@@ -19,8 +19,8 @@ import json
 
 class UserAV(APIView):
     def get(self, request):
-        movies = User.objects.all()
-        serializer = UserSerializer(movies, many=True)
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
     
     def post(self, request): 
@@ -33,12 +33,26 @@ class UserAV(APIView):
         
 class ArtistAV(APIView):
     def get(self, request):
-        movies = Artist.objects.all()
-        serializer = ArtistSerializer(movies, many=True)
+        artists = Artist.objects.all()
+        serializer = ArtistSerializer(artists, many=True)
         return Response(serializer.data)
     
     def post(self, request): 
         serializer = ArtistSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+        
+class ConcertAV(APIView):
+    def get(self, request):
+        concerts = Concert.objects.all()
+        serializer = ConcertSerializer(concerts, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request): 
+        serializer = ConcertSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -132,28 +146,7 @@ def dashboard(request):
     concerts = []
     for artist in top_artists['items']:
         artist_name = artist['name']
-        events = get_upcoming_events(artist_name)
-        concerts.extend(events['events'])
-    
-    for artist in top_artists['items']:
-        # artist_id = artist['id']
-        artist_name = artist['name']
-        
-        try:
-            artist = Artist.objects.get(user=user)
-            artist.name = artist_name
-            artist.save()
-        except Artist.DoesNotExist:
-            artist = Artist.objects.create(
-            name = artist_name,
-            user=user
-        )
-        
-
-
-    for artist in followed_artists['artists']['items']:
-        artist_id = artist['id']
-        artist_name = artist['name']
+        print(artist_name)
         events = get_upcoming_events(artist_name)
         concerts.extend(events['events'])
         try:
@@ -166,9 +159,7 @@ def dashboard(request):
             name = artist_name,
             user=user
         )
-
         for concert in concerts:
-            print("REACHED HERE_________________")
 
             concert_name=concert['short_title']
             concert_id=concert['id']
@@ -189,19 +180,52 @@ def dashboard(request):
                     concert = Concert.objects.create(
                     concert_id=concert_id,
                     name = concert_name,
-                    artist=artist
+                    referring_artist=artist
                 )
-        # try:
-        #     artist = Artist.objects.get(user=user)
-        #     artist.name = artist_name
-        #     artist.save()
-        # except Artist.DoesNotExist:
-        #     artist = Artist.objects.create(
-        #     name = artist_name,
-        #     user=user
-        # )
 
-    #     print(artist)
+
+    for artist in followed_artists['artists']['items']:
+        artist_id = artist['id']
+        artist_name = artist['name']
+        
+        events = get_upcoming_events(artist_name)
+        concerts.extend(events['events'])
+        try:
+            artist = Artist.objects.get(artist_id=artist_id)
+            artist.name = artist_name
+            artist.save()
+        except Artist.DoesNotExist:
+            artist = Artist.objects.create(
+            artist_id=artist_id,
+            name = artist_name,
+            user=user
+        )
+
+        # for concert in concerts:
+        #     print(concert['performers'][0]['name'])
+
+        #     concert_name=concert['short_title']
+        #     concert_id=concert['id']
+        #     concert_date=concert['datetime_utc']
+        #     venue=concert['venue']
+        #     venue_id = venue['id']
+        #     venue_name=venue['name_v2']
+        #     venue_location=venue['location']
+
+        #     if artist_name==concert['performers'][0]['name']:
+        #         print('WORKEEED')
+        #         try:
+        #             concert = Concert.objects.get(concert_id=concert_id)
+        #             concert.name = concert_name
+        #             concert.date_time=concert_date
+        #             concert.save()
+        #         except Concert.DoesNotExist:
+        #             concert = Concert.objects.create(
+        #             concert_id=concert_id,
+        #             name = concert_name,
+        #             referring_artist=artist
+        #         )
+     
 
     
     return render(request, 'dashboard.html', {
