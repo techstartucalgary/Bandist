@@ -7,10 +7,11 @@ from django.shortcuts import render, redirect
 from .models import User, Artist, Concert
 from django.conf import settings
 # from django.contrib.auth.models import User, Artist
-from rest_framework import viewsets, mixins, generics
+from rest_framework import viewsets, mixins, generics, status
 from .serializers import ArtistSerializer, ConcertSerializer, UserSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 
 
 
@@ -44,6 +45,29 @@ class ArtistAV(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+        
+class ArtistDetailAV(APIView):
+    def get(self, request, pk):
+        try:
+            artist = Artist.objects.get(artist_id = pk)
+        except Artist.DoesNotExist:
+            return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = ArtistSerializer(artist) 
+        return Response(serializer.data)
+    
+    def put(self, request, pk):
+        movie = Artist.objects.get(pk = pk)
+        serializer = ArtistSerializer(movie, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    def delete(self, request, pk):
+        movie = Artist.objects.get(pk=pk)
+        movie.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
         
 class ConcertAV(APIView):
     def get(self, request):
