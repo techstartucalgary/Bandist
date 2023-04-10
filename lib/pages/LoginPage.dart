@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 50,
+                                height: 40,
                               ),
                               Container(
                                 padding: const EdgeInsets.all(2),
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                                         'assets/images/loginImage.png')),
                               ),
                               SizedBox(
-                                height: 70,
+                                height: 40,
                               ),
                               Container(
                                   padding: const EdgeInsets.only(
@@ -117,7 +117,10 @@ class _LoginPageState extends State<LoginPage> {
                                           rotation: 0,
                                           text: 'LOGIN',
                                         )),
-                                  ]))
+                                  ])),
+                                   SizedBox(
+                                height: 100,
+                              ),
                             ]),
                       ),
                     ],

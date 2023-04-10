@@ -12,8 +12,6 @@ import '../env.sample.dart';
 import 'artist.dart';
 import 'dart:convert';
 
-
-
 @immutable
 class MockDataItem {
   final String image;
@@ -32,15 +30,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   late Future<List<Employee>> employees;
+  late Future<List<Employee>> employees;
   final employeeListKey = GlobalKey<_HomePageState>();
 
   @override
-
-   void initState() {
+  void initState() {
     super.initState();
     employees = getEmployeeList();
   }
+
   Future<List<Employee>> getEmployeeList() async {
     // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
     print('reached here');
@@ -55,9 +53,10 @@ class _HomePageState extends State<HomePage> {
     List<Employee> employees = items.map<Employee>((json) {
       return Employee.fromJson(json);
     }).toList();
-    print(items); 
+    print(items);
     return employees;
   }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     // final provider = Provider.of<fav_provider>(context);
@@ -188,12 +187,17 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(),
-            const SearchBar(),
+            Stack(
+
+              children: [
+               const Header(),
+               Container(padding: EdgeInsets.only(top:150),child: const SearchBar()),
+              ],
+            ),
             const SizedBox(height: 30),
             TitleWithButton(
               title: 'Trending',
-              text: 'More',
+              // text: 'More',
               press: () {},
             ),
             Container(
@@ -214,7 +218,7 @@ class _HomePageState extends State<HomePage> {
             ),
             TitleWithButton(
               title: 'Best For You',
-              text: 'More',
+              // text: 'More',
               press: () {},
             ),
             Column(
