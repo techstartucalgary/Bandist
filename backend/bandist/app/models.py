@@ -27,7 +27,7 @@ class User(models.Model):
 class Artist(models.Model):
     artist_id = models.CharField(max_length=180, unique=True)
     name = models.CharField(max_length = 180)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='artist', default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='top_artists', default=1)
     def __str__(self):
         return str(self.name)
     

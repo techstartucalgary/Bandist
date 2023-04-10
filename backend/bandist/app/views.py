@@ -18,6 +18,26 @@ from rest_framework.views import APIView
 import requests
 import json
 
+class UserTopArtistsAV(APIView):
+    def get(self, request, pk):
+        try:
+            user = User.objects.get(spotify_id=pk)
+        except User.DoesNotExist:
+            return Response({'Error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        sp = spotipy.Spotify(auth=user.access_token)
+        top_artists_data = sp.current_user_top_artists(limit=50, time_range='short_term')
+        artist_ids = []
+        for artist in top_artists_data['items']:
+            artist_id = artist['id']
+            artist_name = artist['name']
+            artist_ids.append(artist_id)
+            if not Artist.objects.filter(artist_id=artist_id).exists():
+                artist = Artist(artist_id=artist_id, name=artist_name, user=user)
+                artist.save()
+        artists = Artist.objects.filter(artist_id__in=artist_ids)
+        serializer = ArtistSerializer(artists, many=True)
+        return Response(serializer.data)
+    
 class UserAV(APIView):
     def get(self, request):
         users = User.objects.all()

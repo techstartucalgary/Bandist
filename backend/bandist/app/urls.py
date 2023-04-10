@@ -12,7 +12,7 @@ from django.urls import path, include
 from . import views
 from django.contrib import admin
 from rest_framework import routers
-from .views import ArtistAV, ConcertAV, ArtistDetailAV
+from .views import ArtistAV, ConcertAV, ArtistDetailAV, UserTopArtistsAV, UserAV
 
 # router = routers.DefaultRouter()
 # router.register('concerts', views.ArtistViewSet)
@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', views.logout, name='logout'),
     path('artists/', ArtistAV.as_view(), name='artists'),
+    path('users/', UserAV.as_view(), name='users'),
     path('concerts/', ConcertAV.as_view(), name='concerts'),
-    path('artists/<str:pk>', ArtistDetailAV.as_view(), name='artist-detail')
+    path('artists/<str:pk>', ArtistDetailAV.as_view(), name='artist-detail'),
+    path('users/<str:pk>/top-artists/', UserTopArtistsAV.as_view(), name='user-top-artists'),
 ]
