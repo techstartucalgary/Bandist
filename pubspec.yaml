@@ -31,6 +31,7 @@ environment:
 dependencies:
   provider: ^6.0.5
   carousel_slider: ^4.2.1
+  rive: ^0.9.1
   flutter:
     sdk: flutter
 
@@ -76,6 +77,9 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/Backgrounds/
+    - assets/icons/
+    - assets/RiveAssets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

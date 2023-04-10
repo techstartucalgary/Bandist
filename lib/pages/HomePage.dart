@@ -7,6 +7,12 @@ import 'package:provider/provider.dart';
 import '../widgets/components/TitleAndButton.dart';
 import '../widgets/home page/Cards.dart';
 import '../widgets/components/SearchBar.dart';
+import 'package:http/http.dart' as http;
+import '../env.sample.dart';
+import 'artist.dart';
+import 'dart:convert';
+
+
 
 @immutable
 class MockDataItem {
@@ -26,7 +32,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+   late Future<List<Employee>> employees;
+  final employeeListKey = GlobalKey<_HomePageState>();
+
   @override
+
+   void initState() {
+    super.initState();
+    employees = getEmployeeList();
+  }
+  Future<List<Employee>> getEmployeeList() async {
+    // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
+    print('reached here');
+
+    String url = 'http://127.0.0.1:8000/users/';
+    http.Response response = await http.get(Uri.parse(url));
+    String val = response.body;
+    List<dynamic> data = jsonDecode(val);
+    print(val);
+    print('________________________________');
+    final items = json.decode(response.body).cast<Map<String, dynamic>>();
+    List<Employee> employees = items.map<Employee>((json) {
+      return Employee.fromJson(json);
+    }).toList();
+    print(items); 
+    return employees;
+  }
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     // final provider = Provider.of<fav_provider>(context);
