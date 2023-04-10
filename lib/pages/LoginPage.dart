@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Spacer(),
+                      // const Spacer(),
                       SizedBox(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,

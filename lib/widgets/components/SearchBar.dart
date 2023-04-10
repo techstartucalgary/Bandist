@@ -23,7 +23,7 @@ class SearchBar extends StatelessWidget {
             blurRadius: 20,
             offset: const Offset(0, 10),
             color: kPrimaryColor.withOpacity(0.23)),
-      ], borderRadius: BorderRadius.circular(30), color: Color.fromARGB(255, 85, 36, 36)),
+      ], borderRadius: BorderRadius.circular(30), color: Color.fromARGB(255, 162, 67, 67)),
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 10),
         child: Row(
