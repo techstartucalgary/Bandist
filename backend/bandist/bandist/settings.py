@@ -163,6 +163,24 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES':  [
+#     'rest_framework.permissoins.IsAuthenticated',
+#     'rest_framework.authentication.TokenAuthentication'
+#     ],
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#     'rest_framework_simplejwt.authentication.JWTAuthentication'
+#     )
+# }
+
+from datetime import timedelta 
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
+}
+
 INSTALLED_APPS = [
     'app',
     'django.contrib.admin',
@@ -172,6 +190,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -182,6 +201,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'bandist.urls'
@@ -203,6 +223,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bandist.wsgi.application'
+
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:65495",
+    "http://localhost:65495"
+]
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Database
