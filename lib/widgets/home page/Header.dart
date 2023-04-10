@@ -13,7 +13,7 @@ class Header extends StatelessWidget {
       children: [
         HomePageAppBar(),
         Container(
-          height: size.height * 0.20,
+          height: size.height * 0.15,
           child: Stack(
             children: [
               Container(
@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 20, 0),
-                height: size.height * 0.15,
+                height: size.height * 0.30,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

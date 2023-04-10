@@ -182,49 +182,62 @@ class _HomePageState extends State<HomePage> {
         .toList();
 
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      // backgroundColor: kBackgroundColor,
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-
-              children: [
-               const Header(),
-               Container(padding: EdgeInsets.only(top:150),child: const SearchBar()),
+      body: Container(
+        decoration: BoxDecoration(gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 250, 251, 252),
+                Color.fromARGB(255, 248, 233, 250),
+                Color.fromARGB(255, 250, 251, 252),
+                Color.fromARGB(255, 227, 237, 255),
+                Color.fromARGB(255, 250, 251, 252),
               ],
-            ),
-            const SizedBox(height: 30),
-            TitleWithButton(
-              title: 'Trending',
-              // text: 'More',
-              press: () {},
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              width: size.width,
-              height: 200,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.5,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  initialPage: 2,
-                  autoPlay: true,
-                ),
-                items: imageSliders,
+            )),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+
+                children: [
+                 const Header(),
+                 Container(padding: EdgeInsets.only(top:160),child: const SearchBar()),
+                ],
               ),
-            ),
-            TitleWithButton(
-              title: 'Best For You',
-              // text: 'More',
-              press: () {},
-            ),
-            Column(
-              children: cardsList,
-            ),
-          ],
+              const SizedBox(height: 30),
+              TitleWithButton(
+                title: 'Trending',
+                // text: 'More',
+                press: () {},
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: size.width,
+                height: 200,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.5,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    initialPage: 2,
+                    autoPlay: true,
+                  ),
+                  items: imageSliders,
+                ),
+              ),
+              TitleWithButton(
+                title: 'Best For You',
+                // text: 'More',
+                press: () {},
+              ),
+              Column(
+                children: cardsList,
+              ),
+            ],
+          ),
         ),
       ),
     );
