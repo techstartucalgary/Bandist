@@ -11,7 +11,6 @@ class Header extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        HomePageAppBar(),
         Container(
           height: size.height * 0.15,
           child: Stack(
@@ -19,7 +18,7 @@ class Header extends StatelessWidget {
               Container(
                 height: size.height * 0.20 - 27,
                 decoration: const BoxDecoration(
-                    color: kPrimaryColor,
+                    color: Color.fromARGB(255, 214, 151, 151),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
@@ -35,7 +34,7 @@ class Header extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Color.fromARGB(255, 232, 221, 221)),
                     ),
                     Image.asset('assets/images/SplashPageLogo.png')
                   ],

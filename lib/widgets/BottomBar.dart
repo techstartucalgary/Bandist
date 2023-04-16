@@ -32,8 +32,7 @@ class _BottomBarState extends State<BottomBar> {
         body: Center(child: _widgetOptions[_selectedIndex]),
         bottomNavigationBar: Container(
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            
             child: BottomNavigationBar(
               showSelectedLabels: false,
               showUnselectedLabels: false,
