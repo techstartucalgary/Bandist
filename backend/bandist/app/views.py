@@ -190,6 +190,7 @@ def dashboard(request):
     concerts = []
     for artist in top_artists['items']:
         artist_name = artist['name']
+        artist_id = artist['id']
         print(artist_name)
         events = get_upcoming_events(artist_name)
         concerts.extend(events['events'])

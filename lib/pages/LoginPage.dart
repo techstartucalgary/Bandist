@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                                         child: const Text(
                                           'BANDIST',
                                           style: TextStyle(
-                                            color:Colors.black,
+                                              color: Colors.black,
                                               fontSize: 70.0,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -94,12 +94,12 @@ class _LoginPageState extends State<LoginPage> {
                               SizedBox(
                                 height: 40,
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(2),
-                                child: const Image(
-                                    image: AssetImage(
-                                        'assets/images/loginImage.png')),
-                              ),
+                              // Container(
+                              //   padding: const EdgeInsets.all(2),
+                              //   child: const Image(
+                              //       image: AssetImage(
+                              //           'assets/images/loginImage.png')),
+                              // ),
                               SizedBox(
                                 height: 40,
                               ),
@@ -109,9 +109,10 @@ class _LoginPageState extends State<LoginPage> {
                                       left: 20.0,
                                       right: 20.0,
                                       bottom: 20.0),
-                                  child: Column(children: <Widget>[ SizedBox(
-                                height: 30,
-                              ),
+                                  child: Column(children: <Widget>[
+                                    SizedBox(
+                                      height: 30,
+                                    ),
                                     // ignore: sized_box_for_whitespace
                                     GestureDetector(
                                         onTap: () {

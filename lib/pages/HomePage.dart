@@ -41,26 +41,26 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // employees = getEmployeeList();
+    getEmployeeList();
   }
 
-  // Future<List<Employee>> getEmployeeList() async {
-  //   // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
-  //   print('reached here');
+  Future<List<Employee>> getEmployeeList() async {
+    // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
+    print('reached here');
 
-  //   String url = 'http://127.0.0.1:8000/users/';
-  //   http.Response response = await http.get(Uri.parse(url));
-  //   String val = response.body;
-  //   List<dynamic> data = jsonDecode(val);
-  //   print(val);
-  //   print('________________________________');
-  //   final items = json.decode(response.body).cast<Map<String, dynamic>>();
-  //   List<Employee> employees = items.map<Employee>((json) {
-  //     return Employee.fromJson(json);
-  //   }).toList();
-  //   print(items);
-  //   return employees;
-  // }
+    String url = 'http://127.0.0.1:8000/artists/';
+    http.Response response = await http.get(Uri.parse(url));
+    String val = response.body;
+    List<dynamic> data = jsonDecode(val);
+    print(val);
+    print('________________________________');
+    final items = json.decode(response.body).cast<Map<String, dynamic>>();
+    // List<Employee> employees = items.map<Employee>((json) {
+    //   return Employee.fromJson(json);
+    // }).toList();
+    // print(items);
+    return employees;
+  }
 
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
@@ -184,7 +184,6 @@ class _HomePageState extends State<HomePage> {
                 bottom: 0,
                 right: 0,
                 child: Image.asset('assets/images/blob1.png')),
-
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
