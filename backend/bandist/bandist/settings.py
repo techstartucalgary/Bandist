@@ -225,11 +225,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bandist.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:57405",
-    "http://localhost:57405"
+    "http://127.0.0.1:59031",
+    "http://localhost:59031",
+    "http://10.0.2.2:80",
+    "http://localhost:80",
+    "http://10.9.88.64:8000",
+    "http://172.20.10.4:8000",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2', '10.9.88.64', '172.20.10.4']
 
 
 # Database
@@ -285,9 +289,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #SPOTIPY
-SPOTIPY_CLIENT_ID = "d4aa56ab1e3243168d3be322b8cad9af"
-SPOTIPY_CLIENT_SECRET = "831695beab5c4d5e9c8f2bc42bdbe422"
-SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/"
+SPOTIPY_CLIENT_ID = "954437538f1a472baf1170f0b2c39640"
+SPOTIPY_CLIENT_SECRET = "2af8220890344e9ca0a77612f8609380"
+SPOTIPY_REDIRECT_URI = "http://172.20.10.4:8000/login/callback/"
 
 #SEATGEEK
 SEATGEEK_CLIENT_ID = "MzE2NDYwNTB8MTY3NDc2NTA1MC42NTMyNjcx"

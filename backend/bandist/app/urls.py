@@ -28,5 +28,8 @@ urlpatterns = [
     path('users/', UserAV.as_view(), name='users'),
     path('concerts/', ConcertAV.as_view(), name='concerts'),
     path('artists/<str:pk>', ArtistDetailAV.as_view(), name='artist-detail'),
-    path('users/<str:pk>/top-artists/', UserTopArtistsAV.as_view(), name='user-top-artists'),
+    path('users/<str:pk>/', UserTopArtistsAV.as_view(), name='user-top-artists'),
+    # path('<str:pk>/artists/', Name.as_view(), name='user-artists'),
+    #       ^spotify_id
+
 ]

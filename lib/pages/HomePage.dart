@@ -35,30 +35,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Employee>> employees;
+  Future<List<Employee>>? employees;
   final employeeListKey = GlobalKey<_HomePageState>();
 
   @override
   void initState() {
     super.initState();
-    getEmployeeList();
+    employees = getEmployeeList();
   }
 
   Future<List<Employee>> getEmployeeList() async {
     // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
     print('reached here');
 
-    String url = 'http://127.0.0.1:8000/artists/';
+    String url = '172.20.10.4:8000/users/';
     http.Response response = await http.get(Uri.parse(url));
     String val = response.body;
     List<dynamic> data = jsonDecode(val);
-    print(val);
+    // print(data[0]);
     print('________________________________');
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
-    // List<Employee> employees = items.map<Employee>((json) {
-    //   return Employee.fromJson(json);
-    // }).toList();
-    // print(items);
+    final res = items[0]['top_artists'];
+    List<Employee> employees = res.map<Employee>((json) {
+      return Employee.fromJson(json);
+    }).toList();
+    print(employees);
     return employees;
   }
 
@@ -204,42 +205,72 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(child: const SearchBar()),
                 const SizedBox(height: 30),
-                TitleWithButton(
-                  title: 'Top Artists',
-                  press: () {},
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                          color: Color.fromARGB(255, 160, 160, 159)
-                              .withOpacity(0.23)),
-                    ],
+                Column(children: [
+                  TitleWithButton(
+                    title: 'Top Artists',
+                    press: () {},
                   ),
-                  margin: const EdgeInsets.only(top: 10),
-                  width: size.width,
-                  height: 200,
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 0.5,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      initialPage: 2,
-                      autoPlay: true,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                            color: Color.fromARGB(255, 160, 160, 159)
+                                .withOpacity(0.23)),
+                      ],
                     ),
-                    items: imageSliders,
+                    margin: const EdgeInsets.only(top: 10),
+                    width: size.width,
+                    height: 200,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.5,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: false,
+                        initialPage: 2,
+                        autoPlay: true,
+                      ),
+                      items: imageSliders,
+                    ),
                   ),
-                ),
-                TitleWithButton(
-                  title: 'Followed Artists',
-                  press: () {},
-                ),
-                //
+                  TitleWithButton(
+                    title: 'Followed Artists',
+                    press: () {},
+                  ),
+                  //],
 
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(20),
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //           blurRadius: 20,
+                  //           offset: const Offset(0, 10),
+                  //           color: Color.fromARGB(255, 160, 160, 159)
+                  //               .withOpacity(0.23)),
+                  //     ],
+                  //   ),
+                  //   margin: const EdgeInsets.only(top: 10),
+                  //   width: size.width,
+                  //   height: 200,
+                  //   child: CarouselSlider(
+                  //     options: CarouselOptions(
+                  //       aspectRatio: 16 / 9,
+                  //       viewportFraction: 0.5,
+                  //       enlargeCenterPage: true,
+                  //       enableInfiniteScroll: false,
+                  //       initialPage: 2,
+                  //       autoPlay: true,
+                  //     ),
+                  //     items: imageSliders,
+                  //   ),
+                  // ),
+
+                  // //
+                ]),
                 Row(
                   children: [
                     Container(
@@ -274,89 +305,150 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 Container(
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      double defaultSize = SizeConfig.defaultSize;
+                    child: FutureBuilder<List<Employee>>(
+                  future: employees,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    // By default, show a loading spinner.
+                    if (!snapshot.hasData) return CircularProgressIndicator();
+                    // Render employee lists)
 
-                      return Container(
-                        margin:
-                            EdgeInsets.only(left: 15, right: 15, bottom: 10),
-                        child: Row(
-                          //might need to wrap each child of the row for gesture detector
-                          mainAxisAlignment: MainAxisAlignment.center,
+                    return ListView.builder(
+                      
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        var data = snapshot.data[index];
+                        double defaultSize = SizeConfig.defaultSize;
+
+                        return Column(
                           children: [
-                            Container(
-                              width: 150,
-                              height: 170,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 20,
-                                        offset: const Offset(0, 10),
-                                        color:
-                                            Color.fromARGB(255, 160, 160, 159)
-                                                .withOpacity(0.23)),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 100,
+                                  width: 100,
                                   color: Colors.white,
-                                  image: const DecorationImage(
-                                      image: NetworkImage(
-                                    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-                                  ))),
-                            ),
-                            Expanded(
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.only(top: 10, left: 10),
-                                height: 150,
-                                // color: Colors.white,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 20,
-                                        offset: const Offset(0, 10),
-                                        color:
-                                            Color.fromARGB(255, 160, 160, 159)
-                                                .withOpacity(0.23)),
-                                  ],
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      bottomRight: Radius.circular(20)),
+                                  margin: EdgeInsets.only(left: 20, top: 10),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Stack(
+                                  children: [
                                     Text(
-                                      'Title',
+                                      data.name,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black),
                                     ),
-
-                                    SizedBox(height: defaultSize * 2),
-                                    Text(
-                                      "Location",
-                                    ),
-                                    Text(
-                                      "Date",
-                                    ),
-                                    SizedBox(height: defaultSize * 2), //20
-                                    Text("Avg Price"),
+                                    Positioned(
+                                      bottom: 1,
+                                      left: 0,
+                                      right: 0,
+                                      child: Container(
+                                        height: 3,
+                                        color: kPrimaryColor.withOpacity(0.3),
+                                      ),
+                                    )
                                   ],
                                 ),
-                              ),
+                              ],
                             ),
+                            // ListView.builder(
+                            //   shrinkWrap: true,
 
-                            // for the row in the concert
+                            //   itemCount: data.concert.length,
+                            //   itemBuilder: (BuildContext context, int index) {
+                            //     return Container(
+                            //       margin: EdgeInsets.only(
+                            //           left: 15, right: 15, bottom: 10),
+                            //       child: Row(
+                            //         //might need to wrap each child of the row for gesture detector
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           Container(
+                            //             width: 150,
+                            //             height: 170,
+                            //             decoration: BoxDecoration(
+                            //                 boxShadow: [
+                            //                   BoxShadow(
+                            //                       blurRadius: 20,
+                            //                       offset: const Offset(0, 10),
+                            //                       color: Color.fromARGB(
+                            //                               255, 160, 160, 159)
+                            //                           .withOpacity(0.23)),
+                            //                 ],
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(10),
+                            //                 color: Colors.white,
+                            //                 image: const DecorationImage(
+                            //                     image: NetworkImage(
+                            //                   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+                            //                 ))),
+                            //           ),
+                            //           Expanded(
+                            //             child: Container(
+                            //               padding: const EdgeInsets.only(
+                            //                   top: 10, left: 10),
+                            //               height: 150,
+                            //               // color: Colors.white,
+                            //               decoration: BoxDecoration(
+                            //                 boxShadow: [
+                            //                   BoxShadow(
+                            //                       blurRadius: 20,
+                            //                       offset: const Offset(0, 10),
+                            //                       color: Color.fromARGB(
+                            //                               255, 160, 160, 159)
+                            //                           .withOpacity(0.23)),
+                            //                 ],
+                            //                 color: Colors.white,
+                            //                 borderRadius: BorderRadius.only(
+                            //                     topRight: Radius.circular(20),
+                            //                     bottomRight:
+                            //                         Radius.circular(20)),
+                            //               ),
+                            //               child: Column(
+                            //                 crossAxisAlignment:
+                            //                     CrossAxisAlignment.start,
+                            //                 mainAxisAlignment:
+                            //                     MainAxisAlignment.center,
+                            //                 children: <Widget>[
+                            //                   Text(
+                            //                     data.concert.name,
+                            //                   ),
+
+                            //                   SizedBox(height: defaultSize * 2),
+                            //                   Text(
+                            //                     'location',
+                            //                   ),
+                            //                   Text(
+                            //                    data.concert.date,
+                            //                   ),
+                            //                   SizedBox(
+                            //                       height: defaultSize * 2), //20
+                            //                   Text("Avg Price"),
+                            //                 ],
+                            //               ),
+                            //             ),
+                            //           ),
+
+                            //           // for the row in the concert
+                            //         ],
+                            //       ),
+                            //     );
+                            //   },
+                            // )
+                          
                           ],
-                        ),
-                      );
-                    },
-                  ),
-                  // )
-                ),
+                        );
+                      },
+                    );
+                  },
+                )
+                    // )
+                    ),
                 const SizedBox(height: 20),
               ],
             ),

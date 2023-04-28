@@ -1,24 +1,30 @@
 class Employee {
-  final String spotify_id;
+  final String artist_id;
   // final String eemail;
-  // final String ename;
+  final String name;
+  final List concert;
 
 
-  Employee({this.spotify_id='000', 
-  // this.eemail='', this.ename=''
+  Employee({this.artist_id='000', 
+  // this.eemail='', 
+  this.name='',
+  required this.concert,
   });
 
   factory Employee.fromJson(Map<String, dynamic> json) {
     return Employee(
-      spotify_id: json['spotify_id'],
-      // ename: json['ename'],
+      artist_id: json['artist_id'],
+      name: json['name'],
+      concert: json['concert'],
+
       // eemail: json['eemail'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'spotify_id' : spotify_id,
-    // 'ename': ename,
+    'spotify_id' : artist_id,
+    'name': name,
+    'concert': concert,
     // 'eemail': eemail,
   };
 }
