@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_concert_app/pages/HomePage.dart';
 import 'package:flutter_concert_app/pages/LoginPage.dart';
 import 'package:flutter_concert_app/pages/SettingsPage.dart';
+import 'package:flutter_concert_app/pages/LikedPage.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -15,9 +16,9 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    Text('Liked Events'),
-    SettingsPage(),
+    const HomePage(),
+    const LikedPage(),
+    const SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -32,7 +33,6 @@ class _BottomBarState extends State<BottomBar> {
         body: Center(child: _widgetOptions[_selectedIndex]),
         bottomNavigationBar: Container(
           child: ClipRRect(
-            
             child: BottomNavigationBar(
               showSelectedLabels: false,
               showUnselectedLabels: false,
