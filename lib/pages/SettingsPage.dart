@@ -1,11 +1,6 @@
 // ignore_for_file: sort_child_properties_last, file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_concert_app/constants/ColorConstants.dart';
 import 'package:flutter_concert_app/widgets/profile_menu.dart';
-import '../widgets/home page/Header.dart';
-import 'EditProfile.dart';
-
-const String tProfileImage = "assets/images/loginImage.png";
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -28,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Image.asset('assets/images/blob3.png'),
               ),
               Positioned(
-                top: 300,
+                top: 250,
                 child: Image.asset('assets/images/blob4.png'),
               ),
               Positioned(
@@ -47,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       height: 70,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
