@@ -62,18 +62,6 @@ class _LoginPageState extends State<LoginPage> {
                               rotation: 0,
                               text: 'LOGIN',
                             )),
-                        const SizedBox(height: 25.0),
-                        FloatingButton(
-                          rotation: 0,
-                          text: 'SIGN UP',
-                        ),
-                        const SizedBox(height: 20.0),
-                        FloatingButton(
-                            rotation: 0,
-                            text: 'GO BACK',
-                            textColor: Colors.black,
-                            boxColor: Colors.white,
-                            shadowColor: Colors.black),
                       ]))
                 ])));
   }

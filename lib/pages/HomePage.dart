@@ -6,6 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import '../widgets/components/TitleAndButton.dart';
 import '../widgets/home page/Cards.dart';
+import '../widgets/components/SearchBar.dart';
 
 @immutable
 class MockDataItem {
@@ -18,13 +19,69 @@ class MockDataItem {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  List<MockDataItem> searchResults = [];
+
+  final List<MockDataItem> mockDataList = [
+    const MockDataItem(
+      image:
+          'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+      title: 'BTS',
+      subtitle: 'Vancouver, BC',
+    ),
+    const MockDataItem(
+      image:
+          'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+      title: 'Drake',
+      subtitle: 'Toronto, ON',
+    ),
+    const MockDataItem(
+      image:
+          'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+      title: 'Bad Bunny',
+      subtitle: 'Seattle, WA',
+    ),
+    const MockDataItem(
+      image:
+          'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+      title: 'The Weeknd',
+      subtitle: 'Montreal, QC',
+    ),
+    const MockDataItem(
+      image:
+          'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+      title: 'Harry Styles',
+      subtitle: 'New York City, NY',
+    ),
+    const MockDataItem(
+      image:
+          'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
+      title: 'Pitbull',
+      subtitle: 'Miami, FL',
+    ),
+  ];
+
+  void updateList(String searchValue) {
+    if (searchValue.isEmpty) {
+      setState(() {
+        searchResults = [];
+      });
+    } else {
+      final results = mockDataList.where((concert) =>
+          concert.title.toLowerCase().contains(searchValue.toLowerCase()));
+
+      setState(() {
+        searchResults = results.toList();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,45 +95,6 @@ class _HomePageState extends State<HomePage> {
     //   'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
     //   'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
     // ];
-
-    final List<MockDataItem> mockDataList = [
-      const MockDataItem(
-        image:
-            'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-        title: 'BTS',
-        subtitle: 'Vancouver, BC',
-      ),
-      const MockDataItem(
-        image:
-            'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-        title: 'Drake',
-        subtitle: 'Toronto, ON',
-      ),
-      const MockDataItem(
-        image:
-            'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-        title: 'Bad Bunny',
-        subtitle: 'Seattle, WA',
-      ),
-      const MockDataItem(
-        image:
-            'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-        title: 'The Weeknd',
-        subtitle: 'Montreal, QC',
-      ),
-      const MockDataItem(
-        image:
-            'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-        title: 'Harry Styles',
-        subtitle: 'New York City, NY',
-      ),
-      const MockDataItem(
-        image:
-            'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
-        title: 'Pitbull',
-        subtitle: 'Miami, FL',
-      ),
-    ];
 
     final List<Widget> imageSliders = mockDataList
         .map(
@@ -153,43 +171,83 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Header(),
-            const SizedBox(height: 30),
-            TitleWithButton(
-              title: 'Recommended',
-              text: 'More',
-              press: () {},
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              width: size.width,
-              height: 200,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.5,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  initialPage: 2,
-                  autoPlay: true,
+      body: Stack(children: [
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              const Header(),
+              TextField(
+                onChanged: (value) => updateList(value),
+                decoration: InputDecoration(
+                  hintText: 'Search for a concert',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
-                items: imageSliders,
               ),
-            ),
-            TitleWithButton(
-              title: 'Best For You',
-              text: 'More',
-              press: () {},
-            ),
-            Column(
-              children: cardsList,
-            ),
-          ],
+              SizedBox(height: 20.0),
+              TitleWithButton(
+                title: 'Trending',
+                text: 'More',
+                press: () {},
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: size.width,
+                height: 200,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.5,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    initialPage: 2,
+                    autoPlay: true,
+                  ),
+                  items: imageSliders,
+                ),
+              ),
+              TitleWithButton(
+                title: 'Best For You',
+                text: 'More',
+                press: () {},
+              ),
+              Column(
+                children: cardsList,
+              ),
+            ],
+          ),
         ),
-      ),
+        if (searchResults.isNotEmpty)
+          Flexible(
+            child: searchResults.length == 0
+                ? Center(child: Text("No Concert"))
+                : Container(
+                    color: Colors.black.withOpacity(0.6),
+                    height: MediaQuery.of(context).size.height,
+                    child: ListView.builder(
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        final item = searchResults[index];
+                        return Column(
+                          children: [
+                            ConcertCard(
+                              image: item.image,
+                              title: item.title,
+                              subtitle: item.subtitle,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+          ),
+        SizedBox(height: 10),
+      ]),
     );
   }
 }
