@@ -225,8 +225,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bandist.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:58212",
-    "http://localhost:58212",
+    "http://127.0.0.1:62012",
+    "http://localhost:62012",
     "http://10.0.2.2:80",
     "http://localhost:80",
     "http://10.9.88.64:8000",

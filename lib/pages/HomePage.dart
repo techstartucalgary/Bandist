@@ -119,19 +119,21 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 130,
+                      height: 100,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: NetworkImage(item.image),
-                        fit: BoxFit.cover,
-                      )),
+                        image: DecorationImage(
+                          image: NetworkImage(item.image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.only(
                         left: 5,
                         right: 5,
                       ),
-                      height: 30,
+                      width: size.width,
+                      height: 70,
                       decoration: const BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(5.0),
@@ -140,14 +142,19 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white54,
                         shape: BoxShape.rectangle,
                       ),
-                      child: Row(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          const Text(
-                            'Description',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                            ),
+                      child: Column(
+                        children: const [
+                          Text(
+                            'Title',
+                          ),
+                          Text(
+                            "Location",
+                          ),
+                          Text(
+                            "Date",
+                          ),
+                          Text(
+                            "Avg Price",
                           ),
                         ],
                       ),
@@ -179,8 +186,14 @@ class _HomePageState extends State<HomePage> {
         color: Color.fromARGB(255, 245, 241, 241),
         child: SingleChildScrollView(
           child: Stack(children: [
-            Positioned(child: Image.asset('assets/images/blob3.png')),
-            Positioned(top: 250, child: Image.asset('assets/images/blob4.png')),
+            Positioned(
+              right: 0,
+              child: Image.asset('assets/images/blob3.png'),
+            ),
+            Positioned(
+              top: 450,
+              child: Image.asset('assets/images/blob4.png'),
+            ),
             Positioned(
                 bottom: 0,
                 right: 0,
@@ -188,6 +201,9 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 20,
+                ),
                 const Padding(
                   padding: const EdgeInsets.only(left: 30, top: 50),
                   child: Text(
