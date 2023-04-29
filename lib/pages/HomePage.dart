@@ -278,6 +278,7 @@ class _HomePageState extends State<HomePage> {
                       width: 100,
                       color: Colors.white,
                       margin: EdgeInsets.only(left: 20, top: 10),
+                    
                     ),
                     SizedBox(
                       width: 10,
@@ -329,6 +330,7 @@ class _HomePageState extends State<HomePage> {
                                   width: 100,
                                   color: Colors.white,
                                   margin: EdgeInsets.only(left: 20, top: 10),
+                                  child: Image.network(data.img),
                                 ),
                                 SizedBox(
                                   width: 10,

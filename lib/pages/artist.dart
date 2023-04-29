@@ -2,12 +2,14 @@ class Employee {
   final String artist_id;
   // final String eemail;
   final String name;
+  final String img;
   final List concert;
 
 
   Employee({this.artist_id='000', 
   // this.eemail='', 
   this.name='',
+  this.img = '',
   required this.concert,
   });
 
@@ -15,6 +17,7 @@ class Employee {
     return Employee(
       artist_id: json['artist_id'],
       name: json['name'],
+      img:json['img'],
       concert: json['concert'],
 
       // eemail: json['eemail'],
@@ -25,6 +28,6 @@ class Employee {
     'spotify_id' : artist_id,
     'name': name,
     'concert': concert,
-    // 'eemail': eemail,
+    'img': img,
   };
 }
