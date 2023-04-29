@@ -234,6 +234,95 @@ def dashboard(request):
     #                 referring_artist=artist
     #             )
 
+    for artist in top_artists['items']:
+        artist_id = artist['id']
+        artist_name = artist['name']
+        artist_img = artist['images'][0]['url']
+        events = get_upcoming_events(artist_name)
+        concerts.extend(events['events'])
+        print(concerts[0]['venue']['location']['lat'])
+        print(concerts[0]['venue']['location']['lat'])
+        
+        try:
+            artist = Artist.objects.get(artist_id=artist_id)
+            artist.name = artist_name
+            artist.img = artist_img
+            artist.save()
+        except Artist.DoesNotExist:
+            artist = Artist.objects.create(
+            artist_id=artist_id,
+            name = artist_name,
+            img = artist_img,
+            user=user
+        )
+
+        for concert in concerts:
+            print(concert['performers'][0]['name'])
+
+            concert_name=concert['short_title']
+            concert_id=concert['id']
+            concert_date=concert['datetime_utc']
+            concert_lat=concert['venue']['location']['lat']
+            concert_lon=concert['venue']['location']['lon']
+            concert_city = concert['venue']['city']
+
+            url='https://www.air-port-codes.com/api/v1/multi?term=calgary'
+            headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'APC-Auth': 'c982cae096',
+            'APC-Auth-Secret':'1d7e491bac5d47c'
+	        }
+            response = requests.get(url, headers=headers)
+            res = response.json()
+            concert_iata = res['airports'][0]['iata']
+  
+            url = "http://api.aviationstack.com/v1/flights?dep_iata=yyc&access_key=c88dde1107b942a55690954d277c33df"
+            response_flights = requests.get(url)
+            res = response_flights.json()
+            flight_date = res['data'][0]['flight_date']
+            flight_from = res['data'][0]['departure']['airport']
+            flight_to = res['data'][0]['arrival']['airport']
+            airline = res['data'][0]['airline']['name']
+            flight_number = res['data'][0]['flight']['number']
+
+
+            venue=concert['venue']
+            venue_id = venue['id']
+            venue_name=venue['name_v2']
+            venue_location=venue['location']
+
+            if artist_name==concert['performers'][0]['name']:
+                print('WORKEEED')
+                try:
+                    concert = Concert.objects.get(concert_id=concert_id)
+                    concert.name = concert_name
+                    concert.date_time=concert_date
+                    concert.lon=concert_lon
+                    concert.lat=concert_lat
+                    concert.city = concert_city
+                    concert.flight_date = flight_date
+                    concert.flight_from = flight_from
+                    concert.flight_to = flight_to
+                    concert.airline=airline
+                    concert.flight_number = flight_number
+                    concert.save()
+                except Concert.DoesNotExist:
+                    concert = Concert.objects.create(
+                    concert_id=concert_id,
+                    name = concert_name,
+                    lon=concert_lon,
+                    lat=concert_lat,
+                    city=concert_city,
+                    referring_artist=artist,
+                    flight_date = flight_date,
+                    flight_from = flight_from,
+                    flight_to = flight_to,
+                    airline=airline,
+                    flight_number = flight_number,
+                )
+     
+
     
     for artist in followed_artists['artists']['items']:
         artist_id = artist['id']
@@ -267,7 +356,28 @@ def dashboard(request):
             concert_lon=concert['venue']['location']['lon']
             concert_city = concert['venue']['city']
 
-            
+            url='https://www.air-port-codes.com/api/v1/multi?term=calgary'
+            headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'APC-Auth': 'c982cae096',
+            'APC-Auth-Secret':'1d7e491bac5d47c'
+	        }
+            response = requests.get(url, headers=headers)
+            res = response.json()
+            concert_iata = res['airports'][0]['iata']
+  
+            url = "http://api.aviationstack.com/v1/flights?dep_iata=yyc&access_key=4c78e101c1d1bd22efb3b0df50571964"
+            response_flights = requests.get(url)
+            res = response_flights.json()
+            # print(res.get('pagination'))
+            flight_date = res['data'][0]['flight_date']
+            flight_from = res['data'][0]['departure']['airport']
+            flight_to = res['data'][0]['arrival']['airport']
+            airline = res['data'][0]['airline']['name']
+            flight_number = res['data'][0]['flight']['number']
+
+
             venue=concert['venue']
             venue_id = venue['id']
             venue_name=venue['name_v2']
@@ -282,6 +392,11 @@ def dashboard(request):
                     concert.lon=concert_lon
                     concert.lat=concert_lat
                     concert.city = concert_city
+                    concert.flight_date = flight_date
+                    concert.flight_from = flight_from
+                    concert.flight_to = flight_to
+                    concert.airline=airline
+                    concert.flight_number = flight_number
                     concert.save()
                 except Concert.DoesNotExist:
                     concert = Concert.objects.create(
@@ -290,7 +405,12 @@ def dashboard(request):
                     lon=concert_lon,
                     lat=concert_lat,
                     city=concert_city,
-                    referring_artist=artist
+                    referring_artist=artist,
+                    flight_date = flight_date,
+                    flight_from = flight_from,
+                    flight_to = flight_to,
+                    airline=airline,
+                    flight_number = flight_number,
                 )
      
 
@@ -299,6 +419,10 @@ def dashboard(request):
         'top_artists': followed_artists['artists']['items'],
         'concerts': concerts,
     })
+
+    # return redirect("http://localhost:49608/")
+
+
 
 def home(request):
     return render(request, 'home.html')

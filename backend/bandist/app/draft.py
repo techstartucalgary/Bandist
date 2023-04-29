@@ -2,7 +2,7 @@ import requests
 
 url = "https://forteweb-airportguide-airport-basic-info-v1.p.rapidapi.com/airports_nearby"
 
-querystring = {"auth":"<REQUIRED>","lat":"33.942495","lng":"-118.408068","miles":"5"}
+querystring = {"auth":"authairport567","lat":"33.942495","lng":"-118.408068","miles":"5"}
 
 headers = {
 	"content-type": "application/octet-stream",

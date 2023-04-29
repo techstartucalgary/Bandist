@@ -47,6 +47,11 @@ class Concert(models.Model):
     lon=models.CharField(max_length=180)
     lat=models.CharField(max_length=180)
     city = models.CharField(max_length=180)
+    flight_date = models.CharField(max_length=180)
+    flight_from = models.CharField(max_length=180)
+    flight_to = models.CharField(max_length=180)
+    airline = models.CharField(max_length=180)
+    flight_number = models.CharField(max_length=180)
     # referring_venue=models.ForeignKey(Venue,on_delete=models.CASCADE, related_name='venue', default=1)
     referring_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='concert', default=1)
 
