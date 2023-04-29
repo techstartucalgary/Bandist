@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_concert_app/pages/BottomSheetWidget.dart';
 import 'package:flutter_concert_app/widgets/home%20page/Header.dart';
 import '../widgets/components/TitleAndButton.dart';
 import '../widgets/home page/Cards.dart';
@@ -9,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'artist.dart';
 import 'dart:convert';
 import '../constants/SizeConfig.dart';
+import 'dart:io';
 
 //TODO
 
@@ -199,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                 const Padding(
                   padding: const EdgeInsets.only(left: 30, bottom: 10),
                   child: Text(
-                    'Name',
+                    'Nurgul',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -271,39 +273,40 @@ class _HomePageState extends State<HomePage> {
 
                   // //
                 ]),
-                Row(
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.white,
-                      margin: EdgeInsets.only(left: 20, top: 10),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          'Artist Name',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
-                        ),
-                        Positioned(
-                          bottom: 1,
-                          left: 0,
-                          right: 0,
-                          child: Container(
-                            height: 3,
-                            color: kPrimaryColor.withOpacity(0.3),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Container(
+                //       height: 100,
+                //       width: 100,
+                //       color: Colors.white,
+                //       margin: EdgeInsets.only(left: 20, top: 10),
+                //     ),
+                //     SizedBox(
+                //       width: 10,
+                //     ),
+                //     // Stack(
+                //     //   children: [
+                //     //     Text(
+                //     //       'Artist Name',
+                //     //       style: TextStyle(
+                //     //           fontSize: 17,
+                //     //           fontWeight: FontWeight.w500,
+                //     //           color: Colors.black),
+                //     //     ),
+                //     //     Positioned(
+                //     //       bottom: 1,
+                //     //       left: 0,
+                //     //       right: 0,
+                //     //       child: Container(
+                //     //         height: 3,
+                //     //         color: kPrimaryColor.withOpacity(0.3),
+                //     //       ),
+                //     //     )
+                //     //   ],
+                //     // ),
+
+                //   ],
+                // ),
                 Container(
                     child: FutureBuilder<List<Employee>>(
                   future: employees,
@@ -363,11 +366,6 @@ class _HomePageState extends State<HomePage> {
                                 itemBuilder: (BuildContext context, int index) {
                                   String city = data.concert[2]['city'];
 
-                                  Future<http.Response> fetchAlbum() {
-                                    return http.get(Uri.parse(
-                                        'https://forteweb-airportguide-airport-basic-info-v1.p.rapidapi.com/airports_nearby'));
-                                  }
-
                                   return Container(
                                     margin: EdgeInsets.only(
                                         left: 15, right: 15, bottom: 10),
@@ -380,21 +378,23 @@ class _HomePageState extends State<HomePage> {
                                           width: 150,
                                           height: 170,
                                           decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    blurRadius: 20,
-                                                    offset: const Offset(0, 10),
-                                                    color: Color.fromARGB(
-                                                            255, 160, 160, 159)
-                                                        .withOpacity(0.23)),
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.white,
-                                              image: const DecorationImage(
-                                                  image: NetworkImage(
-                                                'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-                                              ))),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  blurRadius: 20,
+                                                  offset: const Offset(0, 10),
+                                                  color: Color.fromARGB(
+                                                          255, 160, 160, 159)
+                                                      .withOpacity(0.23)),
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white,
+                                            image: DecorationImage(
+                                              image: new AssetImage(
+                                                  'assets/images/lizzo.jpg'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
                                         Expanded(
                                           child: Container(
@@ -437,7 +437,7 @@ class _HomePageState extends State<HomePage> {
                                                       ['city'], // city
                                                 ),
                                                 // Text(
-                                                //   data.concert[2]['lat'],
+                                                //   data.concert[2]['flight_date'],
                                                 // ),
                                                 // Text(
                                                 //   data.concert[2]['lon'],
@@ -446,6 +446,71 @@ class _HomePageState extends State<HomePage> {
                                                     height:
                                                         defaultSize * 2), //20
                                                 Text("Avg Price"),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    showModalBottomSheet(
+                                                        backgroundColor:
+                                                            Color.fromARGB(255,
+                                                                241, 239, 244),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        20),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        20))),
+                                                        elevation: 20,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return
+                                                              // Row(
+                                                              //   children: [
+                                                              Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: <Widget>[
+                                                              ListTile(
+                                                                leading: Icon(Icons
+                                                                    .flight_sharp),
+                                                                title: new Text(
+                                                                    'From: ${data.concert[2]['flight_from']}'),
+                                                              ),
+                                                              ListTile(
+                                                                leading: Icon(Icons
+                                                                    .flight_land),
+                                                                title: new Text(
+                                                                    'To: ${data.concert[2]['flight_to']}'),
+                                                              ),
+                                                              ListTile(
+                                                                leading: Icon(Icons
+                                                                    .airlines),
+                                                                title: new Text(
+                                                                    'Airline: ${data.concert[2]['airline']}'),
+                                                              ),
+                                                              ListTile(
+                                                                leading: Icon(
+                                                                    Icons
+                                                                        .numbers),
+                                                                title: new Text(
+                                                                    'Flight Number: ${data.concert[2]['flight_number']}'),
+                                                              ),
+                                                              ListTile(
+                                                                leading: Icon(Icons
+                                                                    .flight_sharp),
+                                                                title: new Text(
+                                                                    'Flight Date: ${data.concert[2]['flight_date']}'),
+                                                              ),
+                                                            ],
+                                                          );
+                                                          //   ],
+                                                          // );
+                                                        });
+                                                  },
+                                                  icon:
+                                                      const Icon(Icons.flight),
+                                                ),
                                               ],
                                             ),
                                           ),
