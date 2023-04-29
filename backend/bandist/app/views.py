@@ -193,18 +193,21 @@ def dashboard(request):
     for artist in top_artists['items']:
         artist_name = artist['name']
         artist_id = artist['id']
+        artist_img = artist['images'][0]['url']
         print(artist_name)
         events = get_upcoming_events(artist_name)
         print(events)
         concerts.extend(events['events'])
         try:
             artist = Artist.objects.get(artist_id=artist_id)
+            artist.img = artist_img
             artist.name = artist_name
             artist.save()
         except Artist.DoesNotExist:
             artist = Artist.objects.create(
             artist_id=artist_id,
             name = artist_name,
+            img = artist_img,
             user=user
         )
         for concert in concerts:
@@ -235,7 +238,7 @@ def dashboard(request):
     for artist in followed_artists['artists']['items']:
         artist_id = artist['id']
         artist_name = artist['name']
-        
+        artist_img = artist['images'][0]['url']
         events = get_upcoming_events(artist_name)
         concerts.extend(events['events'])
         print(concerts[0]['venue']['location']['lat'])
@@ -244,11 +247,13 @@ def dashboard(request):
         try:
             artist = Artist.objects.get(artist_id=artist_id)
             artist.name = artist_name
+            artist.img = artist_img
             artist.save()
         except Artist.DoesNotExist:
             artist = Artist.objects.create(
             artist_id=artist_id,
             name = artist_name,
+            img = artist_img,
             user=user
         )
 
