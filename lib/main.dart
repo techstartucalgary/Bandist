@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             '/bottom-bar': (context) => const BottomBar(),
             '/home': (context) => const HomePage(),
             '/concerts': (context) => const LikedPage(),
-            '/map': (context) => const MapsPage(),
+            // '/map': (context) => const MapsPage(),
             '/privacy': (context) => const PrivacyPage(),
           },
         ));

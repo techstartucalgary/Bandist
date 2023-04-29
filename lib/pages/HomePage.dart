@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_concert_app/pages/MapsPage.dart';
 import 'package:flutter_concert_app/widgets/home%20page/Header.dart';
 import '../widgets/components/TitleAndButton.dart';
 import '../widgets/home page/Cards.dart';
@@ -183,7 +184,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        color: Color.fromARGB(255, 245, 241, 241),
+        color: const Color.fromARGB(255, 245, 241, 241),
         child: SingleChildScrollView(
           child: Stack(children: [
             Positioned(
@@ -233,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                         BoxShadow(
                             blurRadius: 20,
                             offset: const Offset(0, 10),
-                            color: Color.fromARGB(255, 160, 160, 159)
+                            color: const Color.fromARGB(255, 160, 160, 159)
                                 .withOpacity(0.23)),
                       ],
                     ),
@@ -293,14 +294,14 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       width: 100,
                       color: Colors.white,
-                      margin: EdgeInsets.only(left: 20, top: 10),
+                      margin: const EdgeInsets.only(left: 20, top: 10),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Stack(
                       children: [
-                        Text(
+                        const Text(
                           'Artist Name',
                           style: TextStyle(
                               fontSize: 17,
@@ -325,11 +326,12 @@ class _HomePageState extends State<HomePage> {
                   future: employees,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     // By default, show a loading spinner.
-                    if (!snapshot.hasData) return CircularProgressIndicator();
+                    if (!snapshot.hasData)
+                      return const CircularProgressIndicator();
                     // Render employee lists)
 
                     return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
@@ -344,16 +346,17 @@ class _HomePageState extends State<HomePage> {
                                   height: 100,
                                   width: 100,
                                   color: Colors.white,
-                                  margin: EdgeInsets.only(left: 20, top: 10),
+                                  margin:
+                                      const EdgeInsets.only(left: 20, top: 10),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Stack(
                                   children: [
                                     Text(
                                       data.name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black),
@@ -377,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                                 itemCount: data.concert.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                         left: 15, right: 15, bottom: 10),
                                     child: Row(
                                       //might need to wrap each child of the row for gesture detector
@@ -392,7 +395,7 @@ class _HomePageState extends State<HomePage> {
                                                 BoxShadow(
                                                     blurRadius: 20,
                                                     offset: const Offset(0, 10),
-                                                    color: Color.fromARGB(
+                                                    color: const Color.fromARGB(
                                                             255, 160, 160, 159)
                                                         .withOpacity(0.23)),
                                               ],
@@ -415,15 +418,17 @@ class _HomePageState extends State<HomePage> {
                                                 BoxShadow(
                                                     blurRadius: 20,
                                                     offset: const Offset(0, 10),
-                                                    color: Color.fromARGB(
+                                                    color: const Color.fromARGB(
                                                             255, 160, 160, 159)
                                                         .withOpacity(0.23)),
                                               ],
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(20),
-                                                  bottomRight:
-                                                      Radius.circular(20)),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      topRight:
+                                                          Radius.circular(20),
+                                                      bottomRight:
+                                                          Radius.circular(20)),
                                             ),
                                             child: Column(
                                               crossAxisAlignment:
@@ -446,10 +451,26 @@ class _HomePageState extends State<HomePage> {
                                                 Text(
                                                   data.concert[2]['lon'],
                                                 ),
+                                                // add a maps icon button here
+                                                IconButton(
+                                                  onPressed: () {
+                                                    Navigator.push(context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) {
+                                                      return MapsPage(
+                                                          lat: data.concert[2]
+                                                              ['lat'],
+                                                          lon: data.concert[2]
+                                                              ['lon']);
+                                                    }));
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.pin_drop),
+                                                ),
                                                 SizedBox(
                                                     height:
                                                         defaultSize * 2), //20
-                                                Text("Avg Price"),
+                                                const Text("Avg Price"),
                                               ],
                                             ),
                                           ),

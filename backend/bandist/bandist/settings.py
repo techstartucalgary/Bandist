@@ -126,7 +126,7 @@
 # #SPOTIPY
 # SPOTIPY_CLIENT_ID = "73179dc2625a435f8a3672b3379ceadd"
 # SPOTIPY_CLIENT_SECRET = "74a1523073d9411ab200160c41f7e07f"
-# SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/" 
+# SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/"
 
 
 # #SEATGEEK
@@ -143,6 +143,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -173,7 +174,6 @@ ALLOWED_HOSTS = []
 #     )
 # }
 
-from datetime import timedelta 
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
@@ -225,15 +225,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bandist.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:62012",
-    "http://localhost:62012",
+    "http://127.0.0.1:54591",
+    "http://localhost:54591",
     "http://10.0.2.2:80",
     "http://localhost:80",
     "http://10.9.88.64:8000",
     "http://172.20.10.4:8000",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '10.0.2.2', '10.9.88.64', '172.20.10.4']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+                 '10.0.2.2', '10.9.88.64', '172.20.10.4']
 
 
 # Database
@@ -288,11 +289,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#SPOTIPY
+# SPOTIPY
 SPOTIPY_CLIENT_ID = "954437538f1a472baf1170f0b2c39640"
 SPOTIPY_CLIENT_SECRET = "2af8220890344e9ca0a77612f8609380"
 SPOTIPY_REDIRECT_URI = "http://127.0.0.1:8000/login/callback/"
 
-#SEATGEEK
+# SEATGEEK
 SEATGEEK_CLIENT_ID = "MzE2NDYwNTB8MTY3NDc2NTA1MC42NTMyNjcx"
 SEATGEEK_CLIENT_SECRET = "a2351d302e8fb7bfc95b6240df4f45f1b792396653d69844b406505c5330b76c"

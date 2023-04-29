@@ -15,10 +15,15 @@ import 'package:geolocator/geolocator.dart';
 // display the route on the map and zooom out to show the whole route (implement gotoPlace function)
 
 class MapsPage extends StatefulWidget {
-  const MapsPage({Key? key}) : super(key: key);
+  const MapsPage({Key? key, required this.lat, required this.lon})
+      : super(key: key);
 
   @override
   State<MapsPage> createState() => MapSampleState();
+
+  // intialize variables to state and set them to the paramter values
+  final double lat;
+  final double lon;
 }
 
 class MapSampleState extends State<MapsPage> {
@@ -51,14 +56,17 @@ class MapSampleState extends State<MapsPage> {
         mapType: MapType.normal,
         // polylines: _polylines,
         initialCameraPosition: CameraPosition(
-          target: LatLng(37.42796133580664, -122.085749655962),
+          target: LatLng(widget.lat, widget.lon),
           zoom: 14.4746,
         ),
-        // initialCameraPosition: CameraPosition(
-        //   target: LatLng(_currentPosition.latitude.toDouble(),
-        //       _currentPosition.longitude.toDouble()),
-        //   zoom: 14.4746,
-        // ),
+        // create a marker for the concert location
+        markers: {
+          Marker(
+            markerId: const MarkerId('concert'),
+            position: LatLng(widget.lat, widget.lon),
+            infoWindow: const InfoWindow(title: 'Concert'),
+          ),
+        },
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
