@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
+import 'package:flutter_concert_app/pages/PrivacyPage.dart';
+import 'package:flutter_concert_app/pages/SettingsPage.dart';
 import 'package:flutter_concert_app/provider/fav_provider.dart';
 import 'package:flutter_concert_app/widgets/BottomBar.dart';
-import 'package:flutter_concert_app/pages/ConcertsPage.dart';
+import 'package:flutter_concert_app/pages/LikedPage.dart';
+import 'package:flutter_concert_app/pages/MapsPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'pages/HomePage.dart';
 import "./pages/LoginPage.dart";
 
 void main() {
-  fetchUserOrder();
+  // fetchUserOrder();
 
   runApp(const MyApp());
 }
@@ -22,9 +25,10 @@ Future<Null> fetchUserOrder() async {
   var response = await http.get(url, headers: {"Accept": 'application/json'});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
-
-  return null;
 }
+
+//   return null;
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -50,7 +54,9 @@ class MyApp extends StatelessWidget {
             '/login': (context) => const LoginPage(),
             '/bottom-bar': (context) => const BottomBar(),
             '/home': (context) => const HomePage(),
-            '/concerts': (context) => const ConcertsPage(),
+            '/concerts': (context) => const LikedPage(),
+            '/map': (context) => const MapsPage(),
+            '/privacy': (context) => const PrivacyPage(),
           },
         ));
   }

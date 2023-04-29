@@ -5,10 +5,10 @@ class FloatingButton extends StatelessWidget {
   FloatingButton({
     this.rotation = 0,
     required this.text,
-    this.textColor = Colors.white,
-    this.boxColor = kPrimaryColor,
-    this.shadowColor = Colors.blueAccent,
-    this.fontFamily = 'Montserrat',
+    this.textColor =const Color.fromARGB(255, 54, 14, 14),
+    this.boxColor =const Color.fromARGB(255, 225, 248, 255),
+    this.shadowColor = const Color.fromARGB(255, 188, 197, 212),
+    // this.fontFamily = 'Montserrat',
     this.fontWeight = FontWeight.bold,
   });
 
@@ -18,7 +18,7 @@ class FloatingButton extends StatelessWidget {
   final Color boxColor;
   final Color shadowColor;
   final FontWeight fontWeight;
-  final String fontFamily;
+  // final String fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,9 @@ class FloatingButton extends StatelessWidget {
       quarterTurns: rotation,
       child: Container(
           height: 50.0,
+          width: 250,
           child: Material(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(30.0),
             shadowColor: shadowColor,
             color: boxColor,
             elevation: 7.0,
@@ -37,9 +38,10 @@ class FloatingButton extends StatelessWidget {
                 child: Text(
                   text,
                   style: TextStyle(
-                      color: textColor,
+                      color: kTextColor,
                       fontWeight: fontWeight,
-                      fontFamily: fontFamily),
+                      // fontFamily: fontFamily
+                      ),
                 ),
               ),
             ),

@@ -11,22 +11,21 @@ class Header extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        HomePageAppBar(),
         Container(
-          height: size.height * 0.20,
+          height: size.height * 0.15,
           child: Stack(
             children: [
               Container(
                 height: size.height * 0.20 - 27,
                 decoration: const BoxDecoration(
-                    color: kPrimaryColor,
+                    color: Color.fromARGB(255, 214, 151, 151),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 0, 20, 0),
-                height: size.height * 0.15,
+                height: size.height * 0.30,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -35,50 +34,10 @@ class Header extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Color.fromARGB(255, 232, 221, 221)),
                     ),
                     Image.asset('assets/images/SplashPageLogo.png')
                   ],
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 10, right: 10),
-                  height: 40,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                            color: kPrimaryColor.withOpacity(0.23)),
-                      ],
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 10),
-                    child: Row(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        const Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Search',
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.search,
-                          color: kPrimaryColor,
-                        )
-                      ],
-                    ),
-                  ),
                 ),
               ),
             ],

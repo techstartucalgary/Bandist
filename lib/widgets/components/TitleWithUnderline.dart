@@ -16,7 +16,7 @@ class TitleWithUnderline extends StatelessWidget {
             style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Colors.grey.shade700),
+                color: Colors.black),
           ),
           Positioned(
             bottom: 3,
