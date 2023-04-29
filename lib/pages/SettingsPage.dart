@@ -1,11 +1,6 @@
 // ignore_for_file: sort_child_properties_last, file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_concert_app/constants/ColorConstants.dart';
 import 'package:flutter_concert_app/widgets/profile_menu.dart';
-import '../widgets/home page/Header.dart';
-import 'EditProfile.dart';
-
-const String tProfileImage = "assets/images/loginImage.png";
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -18,38 +13,24 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   flexibleSpace: Container(
-      //     decoration: const BoxDecoration(
-      //       gradient: LinearGradient(
-      //         colors: [kBackgroundColor, kPrimaryColor],
-      //         begin: Alignment.topRight,
-      //         end: Alignment.bottomLeft,
-      //       ),
-      //     ),
-      //   ),
-      //   title: const Text(
-      //     'Settings',
-      //     style: TextStyle(
-      //       color: kTextColor,
-      //     ),
-      //   ),
-      // ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [kPrimaryColor, kBackgroundColor],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
-        ),
+        color: Color.fromARGB(255, 245, 241, 241),
         child: SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
-              const Header(),
+              Positioned(
+                right: 0,
+                child: Image.asset('assets/images/blob3.png'),
+              ),
+              Positioned(
+                top: 250,
+                child: Image.asset('assets/images/blob4.png'),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Image.asset('assets/images/blob1.png'),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -58,20 +39,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 30,
+                      height: 70,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 50,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50.0),
-                            child: const Image(
-                              image: AssetImage(tProfileImage),
-                            ),
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 10,
@@ -89,25 +61,10 @@ class _SettingsPageState extends State<SettingsPage> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 45,
-                          ),
-                          child: SizedBox(
-                            height: 40,
-                            width: 30,
-                            child: FloatingActionButton(
-                              onPressed: () {},
-                              child: const Icon(Icons.logout_rounded),
-                              backgroundColor:
-                                  const Color.fromARGB(255, 228, 85, 8),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     SettingsMenu(
                       title: "Edit Profile",
@@ -117,14 +74,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                       textColor: Colors.black,
                       endIcon: true,
-                      onPress: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditProfile(),
-                          ),
-                        );
-                      },
+                      onPress: () {},
                     ),
                     const SizedBox(
                       height: 15,
@@ -159,19 +109,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       title: "Dark Mode",
                       icon: const IconData(
                         0xf065d,
-                        fontFamily: 'MaterialIcons',
-                      ),
-                      textColor: Colors.black,
-                      endIcon: true,
-                      onPress: () {},
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    SettingsMenu(
-                      title: "Payment Method",
-                      icon: const IconData(
-                        0xe481,
                         fontFamily: 'MaterialIcons',
                       ),
                       textColor: Colors.black,
@@ -218,6 +155,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPress: () {
                         Navigator.of(context).pushNamed('/privacy');
                       },
+                    ),
+                    const SizedBox(
+                      height: 170,
                     ),
                   ],
                 ),

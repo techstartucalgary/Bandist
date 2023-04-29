@@ -118,19 +118,21 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     Container(
-                      height: 130,
+                      height: 100,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: NetworkImage(item.image),
-                        fit: BoxFit.cover,
-                      )),
+                        image: DecorationImage(
+                          image: NetworkImage(item.image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.only(
                         left: 5,
                         right: 5,
                       ),
-                      height: 30,
+                      width: size.width,
+                      height: 70,
                       decoration: const BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(5.0),
@@ -139,14 +141,19 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white54,
                         shape: BoxShape.rectangle,
                       ),
-                      child: Row(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          const Text(
-                            'Description',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                            ),
+                      child: Column(
+                        children: const [
+                          Text(
+                            'Title',
+                          ),
+                          Text(
+                            "Location",
+                          ),
+                          Text(
+                            "Date",
+                          ),
+                          Text(
+                            "Avg Price",
                           ),
                         ],
                       ),
@@ -178,8 +185,14 @@ class _HomePageState extends State<HomePage> {
         color: Color.fromARGB(255, 245, 241, 241),
         child: SingleChildScrollView(
           child: Stack(children: [
-            Positioned(child: Image.asset('assets/images/blob3.png')),
-            Positioned(top: 250, child: Image.asset('assets/images/blob4.png')),
+            Positioned(
+              right: 0,
+              child: Image.asset('assets/images/blob3.png'),
+            ),
+            Positioned(
+              top: 450,
+              child: Image.asset('assets/images/blob4.png'),
+            ),
             Positioned(
                 bottom: 0,
                 right: 0,
@@ -187,6 +200,9 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 20,
+                ),
                 const Padding(
                   padding: const EdgeInsets.only(left: 30, top: 50),
                   child: Text(
@@ -354,90 +370,97 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            // ListView.builder(
-                            //   shrinkWrap: true,
+                            Container(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: data.concert.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    margin: EdgeInsets.only(
+                                        left: 15, right: 15, bottom: 10),
+                                    child: Row(
+                                      //might need to wrap each child of the row for gesture detector
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 150,
+                                          height: 170,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    blurRadius: 20,
+                                                    offset: const Offset(0, 10),
+                                                    color: Color.fromARGB(
+                                                            255, 160, 160, 159)
+                                                        .withOpacity(0.23)),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.white,
+                                              image: const DecorationImage(
+                                                  image: NetworkImage(
+                                                'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+                                              ))),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, left: 10),
+                                            height: 150,
+                                            // color: Colors.white,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    blurRadius: 20,
+                                                    offset: const Offset(0, 10),
+                                                    color: Color.fromARGB(
+                                                            255, 160, 160, 159)
+                                                        .withOpacity(0.23)),
+                                              ],
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(20),
+                                                  bottomRight:
+                                                      Radius.circular(20)),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Text(
+                                                  data.concert[2]['name'],
+                                                ),
 
-                            //   itemCount: data.concert.length,
-                            //   itemBuilder: (BuildContext context, int index) {
-                            //     return Container(
-                            //       margin: EdgeInsets.only(
-                            //           left: 15, right: 15, bottom: 10),
-                            //       child: Row(
-                            //         //might need to wrap each child of the row for gesture detector
-                            //         mainAxisAlignment: MainAxisAlignment.center,
-                            //         children: [
-                            //           Container(
-                            //             width: 150,
-                            //             height: 170,
-                            //             decoration: BoxDecoration(
-                            //                 boxShadow: [
-                            //                   BoxShadow(
-                            //                       blurRadius: 20,
-                            //                       offset: const Offset(0, 10),
-                            //                       color: Color.fromARGB(
-                            //                               255, 160, 160, 159)
-                            //                           .withOpacity(0.23)),
-                            //                 ],
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(10),
-                            //                 color: Colors.white,
-                            //                 image: const DecorationImage(
-                            //                     image: NetworkImage(
-                            //                   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-                            //                 ))),
-                            //           ),
-                            //           Expanded(
-                            //             child: Container(
-                            //               padding: const EdgeInsets.only(
-                            //                   top: 10, left: 10),
-                            //               height: 150,
-                            //               // color: Colors.white,
-                            //               decoration: BoxDecoration(
-                            //                 boxShadow: [
-                            //                   BoxShadow(
-                            //                       blurRadius: 20,
-                            //                       offset: const Offset(0, 10),
-                            //                       color: Color.fromARGB(
-                            //                               255, 160, 160, 159)
-                            //                           .withOpacity(0.23)),
-                            //                 ],
-                            //                 color: Colors.white,
-                            //                 borderRadius: BorderRadius.only(
-                            //                     topRight: Radius.circular(20),
-                            //                     bottomRight:
-                            //                         Radius.circular(20)),
-                            //               ),
-                            //               child: Column(
-                            //                 crossAxisAlignment:
-                            //                     CrossAxisAlignment.start,
-                            //                 mainAxisAlignment:
-                            //                     MainAxisAlignment.center,
-                            //                 children: <Widget>[
-                            //                   Text(
-                            //                     data.concert.name,
-                            //                   ),
+                                                SizedBox(
+                                                    height: defaultSize * 2),
+                                                Text(
+                                                  data.concert[2]['date_time'],
+                                                ),
+                                                Text(
+                                                  data.concert[2]['lat'],
+                                                ),
+                                                Text(
+                                                  data.concert[2]['lon'],
+                                                ),
+                                                SizedBox(
+                                                    height:
+                                                        defaultSize * 2), //20
+                                                Text("Avg Price"),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
 
-                            //                   SizedBox(height: defaultSize * 2),
-                            //                   Text(
-                            //                     'location',
-                            //                   ),
-                            //                   Text(
-                            //                    data.concert.date,
-                            //                   ),
-                            //                   SizedBox(
-                            //                       height: defaultSize * 2), //20
-                            //                   Text("Avg Price"),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //           ),
-
-                            //           // for the row in the concert
-                            //         ],
-                            //       ),
-                            //     );
-                            //   },
-                            // )
+                                        // for the row in the concert
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
                           ],
                         );
                       },
