@@ -278,7 +278,6 @@ class _HomePageState extends State<HomePage> {
                       width: 100,
                       color: Colors.white,
                       margin: EdgeInsets.only(left: 20, top: 10),
-                    
                     ),
                     SizedBox(
                       width: 10,
@@ -362,6 +361,13 @@ class _HomePageState extends State<HomePage> {
                                 shrinkWrap: true,
                                 itemCount: data.concert.length,
                                 itemBuilder: (BuildContext context, int index) {
+                                  String city = data.concert[2]['city'];
+
+                                  Future<http.Response> fetchAlbum() {
+                                    return http.get(Uri.parse(
+                                        'https://forteweb-airportguide-airport-basic-info-v1.p.rapidapi.com/airports_nearby'));
+                                  }
+
                                   return Container(
                                     margin: EdgeInsets.only(
                                         left: 15, right: 15, bottom: 10),
@@ -427,11 +433,15 @@ class _HomePageState extends State<HomePage> {
                                                   data.concert[2]['date_time'],
                                                 ),
                                                 Text(
-                                                  data.concert[2]['lat'],
+                                                  data.concert[2]
+                                                      ['city'], // city
                                                 ),
-                                                Text(
-                                                  data.concert[2]['lon'],
-                                                ),
+                                                // Text(
+                                                //   data.concert[2]['lat'],
+                                                // ),
+                                                // Text(
+                                                //   data.concert[2]['lon'],
+                                                // ),
                                                 SizedBox(
                                                     height:
                                                         defaultSize * 2), //20

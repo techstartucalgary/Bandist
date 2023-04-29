@@ -190,49 +190,49 @@ def dashboard(request):
     
     # Seatgeek concerts
     concerts = []
-    for artist in top_artists['items']:
-        artist_name = artist['name']
-        artist_id = artist['id']
-        artist_img = artist['images'][0]['url']
-        print(artist_name)
-        events = get_upcoming_events(artist_name)
-        print(events)
-        concerts.extend(events['events'])
-        try:
-            artist = Artist.objects.get(artist_id=artist_id)
-            artist.img = artist_img
-            artist.name = artist_name
-            artist.save()
-        except Artist.DoesNotExist:
-            artist = Artist.objects.create(
-            artist_id=artist_id,
-            name = artist_name,
-            img = artist_img,
-            user=user
-        )
-        for concert in concerts:
+    # for artist in top_artists['items']:
+    #     artist_name = artist['name']
+    #     artist_id = artist['id']
+    #     artist_img = artist['images'][0]['url']
+    #     print(artist_name)
+    #     events = get_upcoming_events(artist_name)
+    #     print(events)
+    #     concerts.extend(events['events'])
+    #     try:
+    #         artist = Artist.objects.get(artist_id=artist_id)
+    #         artist.img = artist_img
+    #         artist.name = artist_name
+    #         artist.save()
+    #     except Artist.DoesNotExist:
+    #         artist = Artist.objects.create(
+    #         artist_id=artist_id,
+    #         name = artist_name,
+    #         img = artist_img,
+    #         user=user
+    #     )
+    #     for concert in concerts:
 
-            concert_name=concert['short_title']
-            concert_id=concert['id']
-            concert_date=concert['datetime_utc']
-            venue=concert['venue']
-            venue_id = venue['id']
-            venue_name=venue['name_v2']
-            venue_location=venue['location']
+    #         concert_name=concert['short_title']
+    #         concert_id=concert['id']
+    #         concert_date=concert['datetime_utc']
+    #         venue=concert['venue']
+    #         venue_id = venue['id']
+    #         venue_name=venue['name_v2']
+    #         venue_location=venue['location']
 
-            if artist_name==concert['performers'][0]['name']:
-                print('WORKEEED')
-                try:
-                    concert = Concert.objects.get(concert_id=concert_id)
-                    concert.name = concert_name
-                    concert.date_time=concert_date
-                    concert.save()
-                except Concert.DoesNotExist:
-                    concert = Concert.objects.create(
-                    concert_id=concert_id,
-                    name = concert_name,
-                    referring_artist=artist
-                )
+    #         if artist_name==concert['performers'][0]['name']:
+    #             print('WORKEEED')
+    #             try:
+    #                 concert = Concert.objects.get(concert_id=concert_id)
+    #                 concert.name = concert_name
+    #                 concert.date_time=concert_date
+    #                 concert.save()
+    #             except Concert.DoesNotExist:
+    #                 concert = Concert.objects.create(
+    #                 concert_id=concert_id,
+    #                 name = concert_name,
+    #                 referring_artist=artist
+    #             )
 
     
     for artist in followed_artists['artists']['items']:
@@ -265,6 +265,7 @@ def dashboard(request):
             concert_date=concert['datetime_utc']
             concert_lat=concert['venue']['location']['lat']
             concert_lon=concert['venue']['location']['lon']
+            concert_city = concert['venue']['city']
 
             
             venue=concert['venue']
@@ -280,6 +281,7 @@ def dashboard(request):
                     concert.date_time=concert_date
                     concert.lon=concert_lon
                     concert.lat=concert_lat
+                    concert.city = concert_city
                     concert.save()
                 except Concert.DoesNotExist:
                     concert = Concert.objects.create(
@@ -287,6 +289,7 @@ def dashboard(request):
                     name = concert_name,
                     lon=concert_lon,
                     lat=concert_lat,
+                    city=concert_city,
                     referring_artist=artist
                 )
      
