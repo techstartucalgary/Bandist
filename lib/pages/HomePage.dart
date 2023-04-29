@@ -48,11 +48,10 @@ class _HomePageState extends State<HomePage> {
     // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
     print('reached here');
 
-    String url = '172.20.10.4:8000/users/';
+    String url = 'http://127.0.0.1:8080/users/';
     http.Response response = await http.get(Uri.parse(url));
     String val = response.body;
     List<dynamic> data = jsonDecode(val);
-    // print(data[0]);
     print('________________________________');
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
     final res = items[0]['top_artists'];
@@ -313,7 +312,6 @@ class _HomePageState extends State<HomePage> {
                     // Render employee lists)
 
                     return ListView.builder(
-                      
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
@@ -440,7 +438,6 @@ class _HomePageState extends State<HomePage> {
                             //     );
                             //   },
                             // )
-                          
                           ],
                         );
                       },

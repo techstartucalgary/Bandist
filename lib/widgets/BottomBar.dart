@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_concert_app/pages/HomePage.dart';
 import 'package:flutter_concert_app/pages/LoginPage.dart';
 import 'package:flutter_concert_app/pages/SettingsPage.dart';
+import 'package:flutter_concert_app/pages/FlightsPage.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -15,9 +16,10 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    Text('Liked Events'),
-    SettingsPage(),
+    const HomePage(),
+    const Text('Liked Events'),
+    const FlightsPage(),
+    const SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -29,35 +31,46 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(child: _widgetOptions[_selectedIndex]),
-        bottomNavigationBar: Container(
-          child: ClipRRect(
-            
-            child: BottomNavigationBar(
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              selectedItemColor: Color.fromARGB(255, 87, 86, 86),
-              currentIndex: _selectedIndex,
-              onTap: _onItemTapped,
-              items: const [
-                BottomNavigationBarItem(
-                  icon:
-                      Icon(Icons.home, color: Color.fromARGB(255, 90, 88, 89)),
-                  label: "Home",
-                ),
-                BottomNavigationBarItem(
-                    activeIcon: Icon(Icons.favorite),
-                    icon: Icon(Icons.favorite_outline_sharp),
-                    label: "Search"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: "Settings",
-                    activeIcon: Icon(Icons.settings,
-                        color: Color.fromARGB(255, 87, 86, 86)))
-              ],
-              elevation: 2,
+      body: Center(child: _widgetOptions[_selectedIndex]),
+      bottomNavigationBar: ClipRRect(
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: const Color.fromARGB(255, 87, 86, 86),
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Color.fromARGB(255, 90, 88, 89),
+              ),
+              label: "Home",
             ),
-          ),
-        ));
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.favorite,
+                  color: Color.fromARGB(255, 90, 88, 89),
+                ),
+                label: "Search"),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.flight,
+                color: Color.fromARGB(255, 90, 88, 89),
+              ),
+              label: "Flights",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.settings,
+                color: Color.fromARGB(255, 87, 86, 86),
+              ),
+              label: "Settings",
+            )
+          ],
+          elevation: 2,
+        ),
+      ),
+    );
   }
 }
