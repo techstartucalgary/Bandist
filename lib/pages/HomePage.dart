@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     // final response = await http.get(Uri.parse("${Env.URL_PREFIX}/movies/1"));
     print('reached here');
 
-    String url = '172.20.10.4:8000/users/';
+    String url = 'http://127.0.0.1:8000/users/';
     http.Response response = await http.get(Uri.parse(url));
     String val = response.body;
     List<dynamic> data = jsonDecode(val);
@@ -313,7 +313,6 @@ class _HomePageState extends State<HomePage> {
                     // Render employee lists)
 
                     return ListView.builder(
-                      
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
@@ -356,91 +355,97 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            // ListView.builder(
-                            //   shrinkWrap: true,
+                            Container(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: data.concert.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    margin: EdgeInsets.only(
+                                        left: 15, right: 15, bottom: 10),
+                                    child: Row(
+                                      //might need to wrap each child of the row for gesture detector
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 150,
+                                          height: 170,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    blurRadius: 20,
+                                                    offset: const Offset(0, 10),
+                                                    color: Color.fromARGB(
+                                                            255, 160, 160, 159)
+                                                        .withOpacity(0.23)),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.white,
+                                              image: const DecorationImage(
+                                                  image: NetworkImage(
+                                                'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+                                              ))),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, left: 10),
+                                            height: 150,
+                                            // color: Colors.white,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    blurRadius: 20,
+                                                    offset: const Offset(0, 10),
+                                                    color: Color.fromARGB(
+                                                            255, 160, 160, 159)
+                                                        .withOpacity(0.23)),
+                                              ],
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(20),
+                                                  bottomRight:
+                                                      Radius.circular(20)),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Text(
+                                                  data.concert[2]['name'],
+                                                ),
 
-                            //   itemCount: data.concert.length,
-                            //   itemBuilder: (BuildContext context, int index) {
-                            //     return Container(
-                            //       margin: EdgeInsets.only(
-                            //           left: 15, right: 15, bottom: 10),
-                            //       child: Row(
-                            //         //might need to wrap each child of the row for gesture detector
-                            //         mainAxisAlignment: MainAxisAlignment.center,
-                            //         children: [
-                            //           Container(
-                            //             width: 150,
-                            //             height: 170,
-                            //             decoration: BoxDecoration(
-                            //                 boxShadow: [
-                            //                   BoxShadow(
-                            //                       blurRadius: 20,
-                            //                       offset: const Offset(0, 10),
-                            //                       color: Color.fromARGB(
-                            //                               255, 160, 160, 159)
-                            //                           .withOpacity(0.23)),
-                            //                 ],
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(10),
-                            //                 color: Colors.white,
-                            //                 image: const DecorationImage(
-                            //                     image: NetworkImage(
-                            //                   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-                            //                 ))),
-                            //           ),
-                            //           Expanded(
-                            //             child: Container(
-                            //               padding: const EdgeInsets.only(
-                            //                   top: 10, left: 10),
-                            //               height: 150,
-                            //               // color: Colors.white,
-                            //               decoration: BoxDecoration(
-                            //                 boxShadow: [
-                            //                   BoxShadow(
-                            //                       blurRadius: 20,
-                            //                       offset: const Offset(0, 10),
-                            //                       color: Color.fromARGB(
-                            //                               255, 160, 160, 159)
-                            //                           .withOpacity(0.23)),
-                            //                 ],
-                            //                 color: Colors.white,
-                            //                 borderRadius: BorderRadius.only(
-                            //                     topRight: Radius.circular(20),
-                            //                     bottomRight:
-                            //                         Radius.circular(20)),
-                            //               ),
-                            //               child: Column(
-                            //                 crossAxisAlignment:
-                            //                     CrossAxisAlignment.start,
-                            //                 mainAxisAlignment:
-                            //                     MainAxisAlignment.center,
-                            //                 children: <Widget>[
-                            //                   Text(
-                            //                     data.concert.name,
-                            //                   ),
+                                                SizedBox(
+                                                    height: defaultSize * 2),
+                                                Text(
+                                                  data.concert[2]['date_time'],
+                                                ),
+                                                Text(
+                                                  data.concert[2]['lat'],
+                                                ),
+                                                Text(
+                                                  data.concert[2]['lon'],
+                                                ),
+                                                SizedBox(
+                                                    height:
+                                                        defaultSize * 2), //20
+                                                Text("Avg Price"),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
 
-                            //                   SizedBox(height: defaultSize * 2),
-                            //                   Text(
-                            //                     'location',
-                            //                   ),
-                            //                   Text(
-                            //                    data.concert.date,
-                            //                   ),
-                            //                   SizedBox(
-                            //                       height: defaultSize * 2), //20
-                            //                   Text("Avg Price"),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //           ),
-
-                            //           // for the row in the concert
-                            //         ],
-                            //       ),
-                            //     );
-                            //   },
-                            // )
-                          
+                                        // for the row in the concert
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
                           ],
                         );
                       },
