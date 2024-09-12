@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concert_app/constants/ColorConstants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FloatingButton extends StatelessWidget {
+  
   FloatingButton({
     this.rotation = 0,
     required this.text,
@@ -10,6 +12,7 @@ class FloatingButton extends StatelessWidget {
     this.shadowColor = Colors.blueAccent,
     this.fontFamily = 'Montserrat',
     this.fontWeight = FontWeight.bold,
+    this.url = 'https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F'
   });
 
   final int rotation;
@@ -19,6 +22,16 @@ class FloatingButton extends StatelessWidget {
   final Color shadowColor;
   final FontWeight fontWeight;
   final String fontFamily;
+  String url;
+
+  launchURL(String url) async{
+    if (await launch(url)){
+
+    }else{
+      throw 'could not launch $url';
+    }
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +45,11 @@ class FloatingButton extends StatelessWidget {
             color: boxColor,
             elevation: 7.0,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                
+                launchURL(url);
+                
+              },
               child: Center(
                 child: Text(
                   text,
@@ -45,5 +62,4 @@ class FloatingButton extends StatelessWidget {
             ),
           )),
     );
-  }
-}
+  }}

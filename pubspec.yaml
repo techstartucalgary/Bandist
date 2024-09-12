@@ -42,6 +42,7 @@ dependencies:
   iconfont: ^2.0.0
   http: ^0.13.5
   flutter_svg: ^1.1.6
+  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:
