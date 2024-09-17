@@ -1,0 +1,35 @@
+# from django.urls import path
+# from . import views
+
+# urlpatterns = [
+#     path('login', views.login, name='login'),
+#     path('login/callback/', views.login_callback, name='login_callback'),
+#     # path('dashboard', views.dashboard, name='dashboard'),
+#     path('getInfo', views.getInfo, name='get_info'),
+# ]
+
+from django.urls import path, include
+from . import views
+from django.contrib import admin
+from rest_framework import routers
+from .views import ArtistAV, ConcertAV, ArtistDetailAV, UserTopArtistsAV, UserAV
+
+# router = routers.DefaultRouter()
+# router.register('concerts', views.ArtistViewSet)
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('login', views.login, name='login'),
+    path('login/callback/', views.login_callback, name='login_callback'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('admin/', admin.site.urls),
+    path('logout/', views.logout, name='logout'),
+    path('artists/', ArtistAV.as_view(), name='artists'),
+    path('users/', UserAV.as_view(), name='users'),
+    path('concerts/', ConcertAV.as_view(), name='concerts'),
+    path('artists/<str:pk>', ArtistDetailAV.as_view(), name='artist-detail'),
+    path('users/<str:pk>/', UserTopArtistsAV.as_view(), name='user-top-artists'),
+    # path('<str:pk>/artists/', Name.as_view(), name='user-artists'),
+    #       ^spotify_id
+
+]

@@ -7,11 +7,11 @@ class TitleWithButton extends StatelessWidget {
     Key? key,
     required this.title,
     required this.press,
-    required this.text,
+    // required this.text,
   }) : super(key: key);
 
   final String title;
-  final String text;
+  // final String text;
   final Function press;
 
   @override
@@ -24,10 +24,10 @@ class TitleWithButton extends StatelessWidget {
           TitleWithUnderline(
             title: title,
           ),
-          SmallButton(
-            text: text,
-            press: press,
-          ),
+          // SmallButton(
+          //   text: text,
+          //   press: press,
+          // ),
         ],
       ),
     );
